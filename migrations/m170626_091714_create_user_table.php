@@ -22,6 +22,7 @@ class m170626_091714_create_user_table extends Migration
             'status' => $this->smallInteger()->notNull()->defaultValue(0),
             'registered_at' => $this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),
             'last_login_at' => $this->timestamp()->null(),
+            'last_seen' => $this->timestamp()->null(),
             'auth_key' => $this->string(),
             'verification_code' => $this->string(),
         ]);

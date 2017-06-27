@@ -13,6 +13,28 @@ use yii\web\User;
 class WebUser extends User
 {
     /**
+     * @var int
+     */
+    public $lastSeenDelay = 300;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function init()
+    {
+        parent::init();
+
+        // refresh `last_seen` stamp
+        if (!$this->isGuest && (strtotime($this->identity->last_seen) + $this->lastSeenDelay) < time()) {
+            $this->identity->last_seen = date('Y-m-d H:i:s');
+            $this->identity->save(false, [
+                'last_seen',
+            ]);
+        }
+    }
+
+
+    /**
      * Check if current user has specified status.
      * @param int|array $status Status ID or array of statuses IDs.
      * @return bool

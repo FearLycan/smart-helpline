@@ -18,6 +18,7 @@ use yii\web\IdentityInterface;
  * @property int $status
  * @property string $registered_at
  * @property string $last_login_at
+ * @property string $last_seen
  * @property string $auth_key
  * @property string $verification_code
  */
@@ -49,7 +50,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['role', 'status'], 'integer'],
-            [['registered_at', 'last_login_at'], 'safe'],
+            [['registered_at', 'last_login_at','last_seen'], 'safe'],
             [['name', 'lastname', 'email', 'password', 'auth_key', 'verification_code'], 'string', 'max' => 255],
             [['email'], 'unique'],
         ];
@@ -62,11 +63,11 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'lastname' => 'Lastname',
+            'name' => 'Imię',
+            'lastname' => 'Nazwisko',
             'email' => 'Email',
-            'password' => 'Password',
-            'role' => 'Role',
+            'password' => 'Hasło',
+            'role' => 'Rola',
             'status' => 'Status',
             'registered_at' => 'Registered At',
             'last_login_at' => 'Last Login At',
