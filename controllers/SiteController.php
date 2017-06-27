@@ -4,8 +4,11 @@ namespace app\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
-use yii\web\Controller;
+use app\components\Controller;
 use yii\filters\VerbFilter;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
+use app\models\forms\LoginForm;
 
 class SiteController extends Controller
 {
@@ -24,6 +27,13 @@ class SiteController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+                    [
+                        'allow' => true,
+                        'actions' => [
+                            'login'
+                        ],
+                        'roles' => ['?'],
+                    ]
                 ],
             ],
             'verbs' => [
@@ -58,6 +68,43 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        if (Yii::$app->user->isGuest) {
+          //  return $this->redirect(['site/login']);
+        }
+
+
         return $this->render('index');
+    }
+
+
+    /**
+     * @return array|string|Response
+     */
+    public function actionLogin()
+    {
+
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        $model = new LoginForm();
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
+        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
+            if ($model->isAdministrator()) {
+                return $this->redirect(['admin/index']);
+            } else {
+                return $this->redirect(['site/index']);
+            }
+        }
+
+        return $this->render('login', [
+            'model' => $model,
+        ]);
     }
 }

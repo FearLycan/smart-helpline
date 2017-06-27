@@ -12,7 +12,7 @@ $config = [
     'bootstrap' => ['log'],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
         'request' => [
@@ -23,6 +23,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
+            'class' => 'app\components\WebUser',
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
         ],
@@ -51,6 +52,11 @@ $config = [
             'showScriptName' => false,
             'rules' => [
             ],
+        ],
+    ],
+    'modules' => [
+        'admin' => [
+            'class' => 'app\modules\admin\Admin',
         ],
     ],
     'params' => $params,
