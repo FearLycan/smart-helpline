@@ -29,7 +29,7 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => 'Admin Panel',
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandUrl' => ['/admin/user'],
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -57,9 +57,7 @@ AppAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
+        <p class="pull-left">&copy; Smart-Helpline Admin Panel <?= date('Y') ?></p>
     </div>
 </footer>
 
