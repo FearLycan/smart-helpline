@@ -10,6 +10,7 @@ use app\modules\admin\models\UserSearch;
 
 use yii\filters\VerbFilter;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -72,7 +73,7 @@ class UserController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            if($model->message == UserForm::SEND_MESSAGE){
+            if ($model->message == UserForm::SEND_MESSAGE) {
                 $model->sendEmail();
             }
 
@@ -100,7 +101,7 @@ class UserController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            if($model->message == UserForm::SEND_MESSAGE){
+            if ($model->message == UserForm::SEND_MESSAGE) {
                 $model->sendEmail();
             }
 
@@ -130,6 +131,38 @@ class UserController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionUserListJson($phrase, $page = 1)
+    {
+        $limit = 20;
+
+        $users = User::find()
+            ->where(['like', 'name', $phrase])
+            ->orWhere(['like', 'lastname', $phrase])
+            ->limit($limit)
+            ->offset(($page - 1) * $limit)
+            ->all();
+
+        $results = [];
+        /* @var $user User */
+        foreach ($users as $user) {
+            $results[] = [
+                'id' => $user->id,
+                'name' => $user->name,
+                'lastname' => $user->lastname,
+            ];
+        }
+
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        return [
+            'results' => $results,
+            'pagination' => [
+                'page' => $page,
+                'more' => count($results) === $limit,
+            ],
+        ];
+
     }
 
     /**
