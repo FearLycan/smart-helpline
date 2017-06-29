@@ -1,13 +1,15 @@
 <?php
 
+use app\modules\admin\components\Helpers;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\FileSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Files';
+$this->title = 'Pliki';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="file-index">
@@ -16,26 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create File', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
-            'name',
-            'real_name',
-            'format',
-            'category_id',
-            // 'author_id',
-            // 'created_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
-        ],
+        'columns' => Helpers::getColumnsFileGride(),
     ]); ?>
     <?php Pjax::end(); ?>
 </div>

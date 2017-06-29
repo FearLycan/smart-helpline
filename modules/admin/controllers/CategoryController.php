@@ -3,6 +3,8 @@
 namespace app\modules\admin\controllers;
 
 use app\modules\admin\components\Controller;
+use app\modules\admin\models\File;
+use app\modules\admin\models\FileSearch;
 use app\modules\admin\models\forms\CategoryForm;
 use Yii;
 use app\modules\admin\models\Category;
@@ -54,8 +56,14 @@ class CategoryController extends Controller
      */
     public function actionView($id)
     {
+        $searchModel = new FileSearch();
+        $query = File::find()->where(['category_id' => $id]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 

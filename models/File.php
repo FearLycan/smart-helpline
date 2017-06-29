@@ -16,6 +16,7 @@ use Yii;
  * @property string $created_at
  *
  * @property User $author
+ * @property Category $category
  *
  * * @author Damian Brończyk <damian.bronczyk@gmail.pl>
  */
@@ -49,12 +50,12 @@ class File extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
+            'name' => 'Nazwa',
             'real_name' => 'Real Name',
             'format' => 'Format',
             'category_id' => 'Category ID',
             'author_id' => 'Author ID',
-            'created_at' => 'Created At',
+            'created_at' => 'Data utworzenia',
         ];
     }
 
@@ -64,5 +65,13 @@ class File extends \yii\db\ActiveRecord
     public function getAuthor()
     {
         return $this->hasOne(User::className(), ['id' => 'author_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategory()
+    {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
     }
 }

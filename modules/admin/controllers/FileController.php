@@ -3,11 +3,14 @@
 namespace app\modules\admin\controllers;
 
 use app\modules\admin\components\Controller;
+use app\modules\admin\models\Category;
+use app\modules\admin\models\forms\FileForm;
 use Yii;
 use app\modules\admin\models\File;
 use app\modules\admin\models\FileSearch;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * FileController implements the CRUD actions for File model.
@@ -36,7 +39,8 @@ class FileController extends Controller
     public function actionIndex()
     {
         $searchModel = new FileSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $query = File::find();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -45,50 +49,26 @@ class FileController extends Controller
     }
 
     /**
-     * Displays a single File model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new File model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($id)
     {
-        $model = new File();
+        $category = Category::findOne($id);
+        $model = new FileForm();
+        $model->category_id = $id;
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+        if (Yii::$app->request->isPost) {
+            $model->files = UploadedFile::getInstances($model, 'files');
+            if ($model->upload()) {
+                return $this->redirect(['category/view', 'id' => $id]);
+            }
         } else {
             return $this->render('create', [
                 'model' => $model,
-            ]);
-        }
-    }
-
-    /**
-     * Updates an existing File model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
+                'category' => $category,
             ]);
         }
     }
@@ -101,9 +81,30 @@ class FileController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
 
-        return $this->redirect(['index']);
+        unlink(Yii::getAlias('@app/web/files/' . $model->real_name));
+
+        $model->delete();
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    /**
+     * @param $id
+     * @return $this
+     * @throws NotFoundHttpException
+     */
+    public function actionDownload($id)
+    {
+        $model = $this->findModel($id);
+
+        $path = Yii::getAlias('@app/web/files/' . $model->real_name);
+
+        if (file_exists($path)) {
+            return Yii::$app->response->sendFile($path, $model->name);
+         //   $this->downloadFile($path);
+        }
     }
 
     /**

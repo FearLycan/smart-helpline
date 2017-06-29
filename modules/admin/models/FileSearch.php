@@ -12,14 +12,18 @@ use app\modules\admin\models\File;
  */
 class FileSearch extends File
 {
+    public $author;
+    public $category;
+
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'category_id', 'author_id'], 'integer'],
-            [['name', 'real_name', 'format', 'created_at'], 'safe'],
+            [['author', 'category', 'author_id'], 'string'],
+            [['name', 'format', 'created_at'], 'string'],
         ];
     }
 
@@ -36,18 +40,27 @@ class FileSearch extends File
      * Creates data provider instance with search query applied
      *
      * @param array $params
-     *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $query)
     {
-        $query = File::find();
+        $query->joinWith(['author author', 'category category']);
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
+
+        $dataProvider->sort->attributes['author'] = [
+            'asc' => ['author.lastname' => SORT_ASC],
+            'desc' => ['author.lastname' => SORT_DESC],
+        ];
+
+        $dataProvider->sort->attributes['category'] = [
+            'asc' => ['category.name' => SORT_ASC],
+            'desc' => ['category.name' => SORT_DESC],
+        ];
 
         $this->load($params);
 
@@ -60,14 +73,19 @@ class FileSearch extends File
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'category_id' => $this->category_id,
-            'author_id' => $this->author_id,
+            'category' => $this->category,
+            'author' => $this->author,
             'created_at' => $this->created_at,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'real_name', $this->real_name])
-            ->andFilterWhere(['like', 'format', $this->format]);
+            ->andFilterWhere(['like', 'format', $this->format])
+            ->andFilterWhere([
+                'or',
+                ['like', 'author.name', $this->author],
+                ['like', 'author.lastname', $this->author],
+            ]);
 
         return $dataProvider;
     }
