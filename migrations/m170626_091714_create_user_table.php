@@ -4,6 +4,8 @@ use yii\db\Migration;
 
 /**
  * Handles the creation of table `user`.
+ *
+ * @author Damian Brończyk <damian.bronczyk@gmail.com.pl>
  */
 class m170626_091714_create_user_table extends Migration
 {

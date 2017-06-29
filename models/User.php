@@ -21,6 +21,8 @@ use yii\web\IdentityInterface;
  * @property string $last_seen
  * @property string $auth_key
  * @property string $verification_code
+ *
+ * * @author Damian Brończyk <damian.bronczyk@gmail.pl>
  */
 class User extends ActiveRecord implements IdentityInterface
 {
