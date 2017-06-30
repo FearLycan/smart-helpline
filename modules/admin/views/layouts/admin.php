@@ -28,7 +28,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => 'Admin Panel',
+        'brandLabel' => 'Smart-Helpline Admin Panel',
         'brandUrl' => ['/admin/user'],
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',

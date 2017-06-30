@@ -34,11 +34,31 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+
+
+    $menuItems[] = ['label' => '', 'url' => '#'];
+
+    if (!Yii::$app->user->isGuest) {
+        $menuItems[] = [
+            'label' => Yii::$app->user->identity->name . ' ' . Yii::$app->user->identity->lastname,
+            'options' => ['class' => 'hover'],
+            'items' => [
+                ['label' => 'Strona główna', 'url' => ['/site/index']],
+                !Yii::$app->user->identity->isAdministrator() ?: (
+                ['label' => 'Panel admina', 'url' => ['admin/user']]
+                ),
+                '<li class="divider"></li>',
+                ['label' => 'Logout',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post'],
+                ],
+            ]
+        ];
+    }
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']]
-        ],
+        'items' => $menuItems,
     ]);
     NavBar::end();
     ?>
