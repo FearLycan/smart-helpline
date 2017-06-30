@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\Html;
+use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "{{%category}}".
@@ -13,6 +15,7 @@ use Yii;
  * @property int $author_id
  * @property string $created_at
  * @property string $updated_at
+ * @property string $shortDescription
  *
  * @property User $author
  *
@@ -64,5 +67,21 @@ class Category extends \yii\db\ActiveRecord
     public function getAuthor()
     {
         return $this->hasOne(User::className(), ['id' => 'author_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLinkedUsers()
+    {
+        return $this->hasMany(UserCategory::className(), ['category_id' => 'id']);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShortDescription()
+    {
+        return Html::encode(StringHelper::truncate($this->description, 85, ' [...]'));
     }
 }

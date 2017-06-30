@@ -2,8 +2,13 @@
 
 namespace app\controllers;
 
+use app\components\AccessControl;
+use app\models\Category;
+use app\models\CategorySearch;
+use app\models\File;
+use app\models\FileSearch;
+use app\models\User;
 use Yii;
-use yii\filters\AccessControl;
 use app\components\Controller;
 use yii\filters\VerbFilter;
 use yii\web\Response;
@@ -20,20 +25,21 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::className(),
-                'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
+                        'statuses' => [
+                            User::STATUS_ACTIVE,
+                        ],
                     ],
                     [
                         'allow' => true,
                         'actions' => [
-                            'login'
+                            'login',
                         ],
                         'roles' => ['?'],
-                    ]
+                    ],
                 ],
             ],
             'verbs' => [
@@ -68,11 +74,59 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        if (Yii::$app->user->isGuest) {
-            //  return $this->redirect(['site/login']);
-        }
+        $query = Category::find()
+            ->joinWith('linkedUsers cat')
+            ->where(['cat.user_id' => Yii::$app->user->identity->id]);
 
-        return $this->render('index');
+        $searchModel = new CategorySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @return string
+     */
+    public function actionView($id)
+    {
+        $category = Category::findOne($id);
+
+        $query = File::find()->where(['category_id' => $id]);
+
+        $searchModel = new FileSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
+
+        return $this->render('view', [
+            'category' => $category,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    /**
+     * @param $id
+     * @return $this
+     * @throws NotFoundHttpException
+     */
+    public function actionDownload($id)
+    {
+        $model = File::findOne($id);
+
+        if (empty($model) || !Yii::$app->user->identity->canSeeThisCategory($model->category_id)) {
+            $this->accessDenied();
+        } else {
+            $path = Yii::getAlias('@app/web/files/' . $model->real_name);
+
+            if (file_exists($path)) {
+                return Yii::$app->response->sendFile($path, $model->name);
+            } else {
+                $this->notFound();
+            }
+        }
     }
 
 

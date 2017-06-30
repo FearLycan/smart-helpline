@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\modules\admin\models\UserCategory;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
@@ -151,6 +152,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasMany(UserCategory::className(), ['user_id' => 'id']);
     }
+
     /**
      * Finds an identity by the given ID.
      *
@@ -206,5 +208,18 @@ class User extends ActiveRecord implements IdentityInterface
     public static function hashPassword($password)
     {
         return Yii::$app->security->generatePasswordHash($password);
+    }
+
+    /**
+     * @param int $category_id
+     * @return bool
+     */
+    public function canSeeThisCategory($category_id)
+    {
+        $can = UserCategory::find()
+            ->where(['user_id' => $this->id, 'category_id' => $category_id])
+            ->exists();
+
+        return $can;
     }
 }

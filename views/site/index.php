@@ -1,17 +1,58 @@
 <?php
 
 /* @var $this yii\web\View */
+/* @var $searchModel app\modules\admin\models\CategorySearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'My Yii Application';
+use app\models\Category;
+use yii\grid\GridView;
+use yii\helpers\Html;
+use yii\widgets\Pjax;
+
+$this->title = 'Smart Helpline';
 ?>
 <div class="site-index">
 
-    <div class="jumbotron">
-        <h1>Congratulations!</h1>
+    <h1>Kategorie, do których należysz:</h1>
 
-        <p class="lead">You have successfully created your Yii-powered application.</p>
+    <?php Pjax::begin(); ?>
 
-        <p><a class="btn btn-lg btn-success" href="http://www.yiiframework.com">Get started with Yii</a></p>
-    </div>
-
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'attribute' => 'name',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    /* @var $data Category */
+                    return Html::a($data->name, ['site/view', 'id' => $data->id]);
+                },
+                'contentOptions' => ['style' => 'width: 200px;'],
+            ],
+            [
+                'attribute' => 'description',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    /* @var $data Category */
+                    return Html::a($data->shortDescription, ['site/view', 'id' => $data->id]);
+                },
+            ],
+            [
+                'attribute' => 'author',
+                'label' => 'Autor',
+                'value' => function ($data) {
+                    /* @var $data Category */
+                    return $data->author->lastname . ' ' . $data->author->name;
+                },
+                'contentOptions' => ['style' => 'width: 150px; text-align: center;'],
+            ],
+            [
+                'attribute' => 'updated_at',
+                'contentOptions' => ['style' => 'width: 150px; text-align: center;'],
+            ],
+        ],
+    ]); ?>
+    <?php Pjax::end(); ?>
 </div>

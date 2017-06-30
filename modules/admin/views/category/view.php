@@ -4,7 +4,6 @@ use app\modules\admin\components\Helpers;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Category */
