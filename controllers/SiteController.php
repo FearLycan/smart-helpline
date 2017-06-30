@@ -72,7 +72,6 @@ class SiteController extends Controller
             //  return $this->redirect(['site/login']);
         }
 
-
         return $this->render('index');
     }
 
@@ -95,6 +94,9 @@ class SiteController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
+            $model->last_login_at = date('Y-m-d H:i:s');
+            $model->save(false, ['last_login_at']);
 
             if ($model->isAdministrator()) {
                 return $this->redirect(['admin/user']);

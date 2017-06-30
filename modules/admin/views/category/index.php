@@ -28,7 +28,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
-            //'description:ntext',
             [
                 'attribute' => 'author',
                 'label' => 'Autor',
@@ -37,20 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     return $data->author->lastname . ' ' . $data->author->name;
                 },
             ],
-//            [
-//                'label' => 'Status',
-//                'attribute' => 'status',
-//                'filter' => User::getStatusNames(),
-//                'value' => function ($data) {
-//                    /* @var $data User */
-//                    return $data->getStatusName();
-//                },
-//                'contentOptions' => ['style' => 'width: 100px;'],
-//            ],
-            //'author_id',
             'created_at',
-            // 'updated_at',
-
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

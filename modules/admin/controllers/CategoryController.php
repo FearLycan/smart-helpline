@@ -41,7 +41,8 @@ class CategoryController extends Controller
     public function actionIndex()
     {
         $searchModel = new CategorySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $query = Category::find();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -82,8 +83,6 @@ class CategoryController extends Controller
         }
 
         if ($model->load(Yii::$app->request->post())) {
-
-            //$model-
 
             $model->save();
 

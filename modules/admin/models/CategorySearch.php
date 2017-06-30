@@ -5,7 +5,6 @@ namespace app\modules\admin\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\models\Category;
 
 /**
  * CategorySearch represents the model behind the search form of `app\modules\admin\models\Category`.
@@ -42,10 +41,9 @@ class CategorySearch extends Category
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $query)
     {
-        $query = Category::find()
-            ->joinWith(['author author']);
+        $query->joinWith(['author author']);
 
         // add conditions that should always apply here
 

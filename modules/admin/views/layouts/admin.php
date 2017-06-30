@@ -34,15 +34,34 @@ AppAsset::register($this);
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
+
+
+    $menuItems[] = ['label' => 'Użytkownicy', 'url' => ['/admin/user']];
+    $menuItems[] = ['label' => 'Kategorie', 'url' => ['/admin/category']];
+    $menuItems[] = ['label' => 'Pliki', 'url' => ['/admin/file']];
+    $menuItems[] = ['label' => 'Kontrakty', 'url' => ['/admin/contract']];
+
+    if (!Yii::$app->user->isGuest ) {
+        $menuItems[] = [
+            'label' => Yii::$app->user->identity->name . ' ' . Yii::$app->user->identity->lastname,
+            'options' => ['class' => 'hover'],
+            'items' => [
+                ['label' => 'Strona główna', 'url' => ['/site/index']],
+                ['label' => 'Panel Admina', 'url' => ['/admin/user']],
+                '<li class="divider"></li>',
+                ['label' => 'Logout',
+                    'url' => ['/site/logout'],
+                    'linkOptions' => ['data-method' => 'post'],
+                ],
+            ]
+        ];
+    }
+
+
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            //['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Użytkownicy', 'url' => ['/admin/user']],
-            ['label' => 'Kategorie', 'url' => ['/admin/category']],
-            ['label' => 'Pliki', 'url' => ['/admin/file']],
-            ['label' => 'Kontrakty', 'url' => ['/admin/contract']],
-        ],
+        'items' => $menuItems,
+        'encodeLabels' => false,
     ]);
     NavBar::end();
     ?>

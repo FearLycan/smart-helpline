@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\UserCategory;
 use app\modules\admin\components\Controller;
 use app\modules\admin\models\forms\UserForm;
 use Yii;
@@ -9,8 +10,10 @@ use app\modules\admin\models\User;
 use app\modules\admin\models\UserSearch;
 
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -55,6 +58,10 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        //$model = $this->findModel($id);
+
+        //die(var_dump($model->categories));
+
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -69,9 +76,15 @@ class UserController extends Controller
     {
         $model = new UserForm();
         $model->scenario = UserForm::SCENARIO_CREATE;
-        $model->status = User::STATUS_ACTIVE;
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
         if ($model->load(Yii::$app->request->post())) {
+
+            //die(var_dump($model->categories));
 
             if ($model->message == UserForm::SEND_MESSAGE) {
                 $model->sendEmail();
@@ -91,6 +104,7 @@ class UserController extends Controller
      * Updates an existing User model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
+     * @property UserForm $model
      * @return mixed
      */
     public function actionUpdate($id)
@@ -98,6 +112,18 @@ class UserController extends Controller
         $model = $this->findModel($id);
         $copy_password = $model->password;
         $model->password = null;
+
+        $model->categories_list = ArrayHelper::getColumn(UserCategory::find()
+            ->where(['user_id' => $id])
+            ->select(['category_id'])
+            ->asArray()->all(),
+            'category_id'
+        );
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
         if ($model->load(Yii::$app->request->post())) {
 
@@ -131,6 +157,18 @@ class UserController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+
+    public function actionDeleteLinkCategory($user_id, $category_id)
+    {
+        $link = UserCategory::find()
+            ->where(['user_id' => $user_id, 'category_id' => $category_id])
+            ->one();
+
+        $link->delete();
+
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     public function actionUserListJson($phrase, $page = 1)

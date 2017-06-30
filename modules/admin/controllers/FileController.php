@@ -103,7 +103,6 @@ class FileController extends Controller
 
         if (file_exists($path)) {
             return Yii::$app->response->sendFile($path, $model->name);
-         //   $this->downloadFile($path);
         }
     }
 

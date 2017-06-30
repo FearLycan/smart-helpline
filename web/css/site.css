@@ -96,9 +96,9 @@ a.desc:after {
     border: none;
 }
 
-@media(max-width:767px) {
+@media (max-width: 767px) {
     .nav li > form > button.logout {
-        display:block;
+        display: block;
         text-align: left;
         width: 100%;
         padding: 10px 15px;
@@ -112,4 +112,17 @@ a.desc:after {
 
 .nav > li > form > button.logout:focus {
     outline: none;
+}
+
+.checkbox-space {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    margin-left: 15px !important;
+    margin-right: 5px !important;
+}
+
+#userform-categories_list {
+    margin-left: -15px;
+    margin-top: 10px;
+    margin-bottom: -15px;
 }

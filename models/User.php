@@ -21,8 +21,9 @@ use yii\web\IdentityInterface;
  * @property string $last_seen
  * @property string $auth_key
  * @property string $verification_code
+ * @property UserCategory[] $categories
  *
- * * @author Damian Brończyk <damian.bronczyk@gmail.pl>
+ * @author Damian Brończyk <damian.bronczyk@gmail.pl>
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -52,7 +53,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             [['role', 'status'], 'integer'],
-            [['registered_at', 'last_login_at','last_seen'], 'safe'],
+            [['registered_at', 'last_login_at', 'last_seen'], 'safe'],
             [['name', 'lastname', 'email', 'password', 'auth_key', 'verification_code'], 'string', 'max' => 255],
             [['email'], 'unique'],
         ];
@@ -143,6 +144,13 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->status == static::STATUS_ACTIVE;
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getCategories()
+    {
+        return $this->hasMany(UserCategory::className(), ['user_id' => 'id']);
+    }
     /**
      * Finds an identity by the given ID.
      *

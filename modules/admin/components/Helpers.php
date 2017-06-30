@@ -2,6 +2,8 @@
 
 
 namespace app\modules\admin\components;
+
+use app\modules\admin\models\Category;
 use app\modules\admin\models\File;
 use yii\helpers\Html;
 
@@ -61,6 +63,27 @@ class Helpers
                         'data-method' => 'post',
                     ]);
                 },
+            ]
+        ];
+    }
+
+
+    public static function getColumnsCategoryGride()
+    {
+        return [
+            [
+                ['class' => 'yii\grid\SerialColumn'],
+                'name',
+                [
+                    'attribute' => 'author',
+                    'label' => 'Autor',
+                    'value' => function ($data) {
+                        /* @var $data Category */
+                        return $data->author->lastname . ' ' . $data->author->name;
+                    },
+                ],
+                'created_at',
+                ['class' => 'yii\grid\ActionColumn'],
             ]
         ];
     }
