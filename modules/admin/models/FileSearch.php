@@ -5,7 +5,6 @@ namespace app\modules\admin\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\admin\models\File;
 
 /**
  * FileSearch represents the model behind the search form of `app\modules\admin\models\File`.
@@ -14,6 +13,9 @@ class FileSearch extends File
 {
     public $author;
     public $category;
+    public $name;
+    public $format;
+    public $created_at;
 
 
     /**
@@ -22,8 +24,7 @@ class FileSearch extends File
     public function rules()
     {
         return [
-            [['author', 'category', 'author_id'], 'string'],
-            [['name', 'format', 'created_at'], 'string'],
+            [['name', 'format', 'created_at', 'author', 'category'], 'string'],
         ];
     }
 
@@ -70,17 +71,11 @@ class FileSearch extends File
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'category' => $this->category,
-            'author' => $this->author,
-            'created_at' => $this->created_at,
-        ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'real_name', $this->real_name])
-            ->andFilterWhere(['like', 'format', $this->format])
+        $query->andFilterWhere(['like', 'file.name', $this->name])
+            ->andFilterWhere(['like', 'file.real_name', $this->real_name])
+            ->andFilterWhere(['like', 'file.format', $this->format])
+            ->andFilterWhere(['like', 'category.name', $this->category])
+            ->andFilterWhere(['like', 'file.created_at', $this->created_at])
             ->andFilterWhere([
                 'or',
                 ['like', 'author.name', $this->author],

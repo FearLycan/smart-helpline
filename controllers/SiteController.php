@@ -11,6 +11,7 @@ use app\models\User;
 use Yii;
 use app\components\Controller;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 use app\models\forms\LoginForm;
@@ -122,11 +123,13 @@ class SiteController extends Controller
             $path = Yii::getAlias('@app/web/files/' . $model->real_name);
 
             if (file_exists($path)) {
-                return Yii::$app->response->sendFile($path, $model->name);
+                return Yii::$app->response->sendFile($path, $model->name . '.' . $model->format);
             } else {
                 $this->notFound();
             }
         }
+
+        return 0;
     }
 
 

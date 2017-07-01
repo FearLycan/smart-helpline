@@ -71,6 +71,8 @@ class FileController extends Controller
                 'category' => $category,
             ]);
         }
+
+        return 0;
     }
 
     /**
@@ -102,8 +104,10 @@ class FileController extends Controller
         $path = Yii::getAlias('@app/web/files/' . $model->real_name);
 
         if (file_exists($path)) {
-            return Yii::$app->response->sendFile($path, $model->name);
+            return Yii::$app->response->sendFile($path, $model->name . '.' . $model->format);
         }
+
+        return 0;
     }
 
     /**

@@ -67,9 +67,9 @@ class FileSearch extends File
         ];
 
         // grid filtering conditions
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'format', $this->format])
-            ->andFilterWhere(['like', 'created_at', $this->created_at])
+        $query->andFilterWhere(['like', 'file.name', $this->name])
+            ->andFilterWhere(['like', 'file.format', $this->format])
+            ->andFilterWhere(['like', 'file.created_at', $this->created_at])
             ->andFilterWhere([
                 'or',
                 ['like', 'author.name', $this->author],

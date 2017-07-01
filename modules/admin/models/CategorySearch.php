@@ -12,7 +12,10 @@ use yii\data\ActiveDataProvider;
 class CategorySearch extends Category
 {
 
+    public $name;
+    public $description;
     public $author;
+    public $created_at;
 
     /**
      * @inheritdoc
@@ -20,8 +23,7 @@ class CategorySearch extends Category
     public function rules()
     {
         return [
-            [['id', 'author_id'], 'integer'],
-            [['name', 'description', 'created_at', 'author', 'updated_at'], 'safe'],
+            [['name', 'description', 'created_at', 'author', 'created_at'], 'string'],
         ];
     }
 
@@ -64,15 +66,9 @@ class CategorySearch extends Category
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'author.lastname' => $this->author,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-        ]);
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description])
+        $query->andFilterWhere(['like', 'category.name', $this->name])
+            ->andFilterWhere(['like', 'category.description', $this->description])
+            ->andFilterWhere(['like', 'category.created_at', $this->created_at])
             ->andFilterWhere([
                 'or',
                 ['like', 'author.name', $this->author],
