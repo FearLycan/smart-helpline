@@ -1,5 +1,6 @@
 <?php
 
+use kartik\date\DatePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -14,7 +15,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'airline_name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'contract_validity')->textInput() ?>
+    <?= $form->field($model, 'contract_validity')->widget(DatePicker::classname(), [
+        'options' => ['placeholder' => 'Wybierz date'],
+        'type' => DatePicker::TYPE_INPUT,
+        'pluginOptions' => [
+            'autoclose' => true,
+            'format' => 'dd-mm-yyyy'
+        ]
+    ]) ?>
 
     <?= $form->field($model, 'routing')->textInput(['maxlength' => true]) ?>
 
