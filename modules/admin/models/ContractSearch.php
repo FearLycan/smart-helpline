@@ -12,6 +12,17 @@ use yii\data\ActiveDataProvider;
 class ContractSearch extends Contract
 {
     public $author;
+    public $airline_name;
+    public $contract_validity;
+    public $routing;
+    public $infant_fares;
+    public $ticket_designator;
+    public $tour_code;
+    public $endorsment;
+    public $interline;
+    public $codeshares;
+    public $created_at;
+    public $updated_at;
 
 
     /**
@@ -20,7 +31,8 @@ class ContractSearch extends Contract
     public function rules()
     {
         return [
-            [['airline_name', 'author', 'contract_validity', 'routing', 'infant_fares', 'ticket_designator', 'tour_code', 'endorsment', 'interline', 'codeshares', 'created_at', 'updated_at'], 'safe'],
+            [['airline_name', 'author', 'contract_validity', 'routing', 'infant_fares', 'ticket_designator', 'tour_code',
+                'endorsment', 'interline', 'codeshares', 'created_at', 'updated_at'], 'string'],
             [['mixed_classes'], 'number'],
         ];
     }
@@ -74,6 +86,8 @@ class ContractSearch extends Contract
             ->andFilterWhere(['like', 'endorsment', $this->endorsment])
             ->andFilterWhere(['like', 'interline', $this->interline])
             ->andFilterWhere(['like', 'codeshares', $this->codeshares])
+            ->andFilterWhere(['like', 'created_at', $this->created_at])
+            ->andFilterWhere(['like', 'contract_validity', $this->contract_validity])
             ->andFilterWhere([
                 'or',
                 ['like', 'author.name', $this->author],

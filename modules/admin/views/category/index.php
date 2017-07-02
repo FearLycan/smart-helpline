@@ -27,13 +27,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'name',
+            [
+                'attribute' => 'name',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    /* @var $data Category */
+                    return Html::a($data->name, ['view', 'id' => $data->id]);
+                },
+            ],
             [
                 'attribute' => 'author',
                 'label' => 'Autor',
+                'format' => 'raw',
                 'value' => function ($data) {
                     /* @var $data Category */
-                    return $data->author->lastname . ' ' . $data->author->name;
+                    return Html::a($data->author->lastname . ' ' . $data->author->name, ['user/view', 'id' => $data->author->id]);
                 },
             ],
             'created_at',

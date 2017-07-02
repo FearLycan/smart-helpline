@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
         'type' => DatePicker::TYPE_INPUT,
         'pluginOptions' => [
             'autoclose' => true,
-            'format' => 'dd-mm-yyyy'
+            'format' => 'yyyy-mm-dd'
         ]
     ]) ?>
 

@@ -1,6 +1,7 @@
 <?php
 
 use app\modules\admin\models\Contract;
+use kartik\date\DatePicker;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -29,11 +30,28 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'airline_name',
-            'contract_validity',
-            'routing',
+            //'contract_validity',
+//            [
+//                'attribute' => 'contract_validity',
+//                'contentOptions' => ['style' => 'width: 160px;'],
+//            ],
+            [
+                'attribute' => 'contract_validity',
+                'contentOptions' => ['style' => 'width: 160px;'],
+                'filter' => '<div class="drp-container input-group">' .
+                    DatePicker::widget([
+                        'name' => 'ContractSearch[contract_validity]',
+                        'type' => DatePicker::TYPE_INPUT,
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                            'format' => 'yyyy-mm-dd'
+                        ]
+                    ]) . '</div>',
+            ],
+            //'routing',
             'infant_fares',
             // 'ticket_designator',
-            'tour_code',
+            //'tour_code',
             // 'endorsment',
             // 'mixed_classes',
             // 'interline',
@@ -47,7 +65,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
 
             ],
-            'created_at',
+            [
+                'attribute' => 'created_at',
+                'contentOptions' => ['style' => 'width: 160px;'],
+                'filter' => '<div class="drp-container input-group">' .
+                    DatePicker::widget([
+                        'name' => 'ContractSearch[created_at]',
+                        'type' => DatePicker::TYPE_INPUT,
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                            'format' => 'yyyy-mm-dd'
+                        ]
+                    ]) . '</div>',
+            ],
+
             // 'updated_at',
 
             ['class' => 'yii\grid\ActionColumn'],
