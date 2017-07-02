@@ -18,7 +18,7 @@ class LoginForm extends User
             [['email'], 'required'],
             ['email', 'email'],
             [['password'], 'required'],
-            ['password', 'validatePassword']
+            ['password', 'validatePasswordData']
         ];
     }
 
@@ -41,7 +41,7 @@ class LoginForm extends User
      * @param array $params the additional name-value pairs given in the rule
      * @return bool|void
      */
-    public function validatePassword($attribute, $params)
+    public function validatePasswordData($attribute, $params)
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();

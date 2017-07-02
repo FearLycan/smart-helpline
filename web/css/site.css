@@ -126,3 +126,17 @@ a.desc:after {
     margin-top: 10px;
     margin-bottom: -15px;
 }
+
+.btn-primary {
+    color: #ffffff;
+    background-color: #1b1e24;
+    border: none;
+    padding: 9px 12px;
+    transition: all 0.12s linear 0s !important;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled], .btn-primary.active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open > .dropdown-toggle.btn-primary.focus, .open > .dropdown-toggle.btn-primary:focus, .open > .dropdown-toggle.btn-primary:hover {
+    background-color: #c6d82c;
+    border: none;
+    padding: 9px 12px;
+}
