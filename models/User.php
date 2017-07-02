@@ -73,9 +73,10 @@ class User extends ActiveRecord implements IdentityInterface
             'password' => 'Hasło',
             'role' => 'Rola',
             'status' => 'Status',
-            'registered_at' => 'Registered At',
-            'last_login_at' => 'Last Login At',
+            'registered_at' => 'Data rejestracji',
+            'last_login_at' => 'Ostatnie logowanie',
             'auth_key' => 'Auth Key',
+            'last_seen' => 'Ostatnia aktywność',
             'verification_code' => 'Verification Code',
         ];
     }

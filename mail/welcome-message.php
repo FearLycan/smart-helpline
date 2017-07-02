@@ -22,7 +22,7 @@ use yii\helpers\Url;
     <h2>Witaj, <?= Html::encode($user->name) . ' ' . Html::encode($user->lastname); ?></h2>
 
     <p>
-        Twoje konto na portalu NAZWA własnie zostało założone. Dane do logowania znajdują się ponieżej.
+        Twoje konto na portalu Smart Helpline Panle własnie zostało założone. Dane do logowania znajdują się ponieżej.
     </p>
 
     <table>
