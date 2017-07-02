@@ -166,4 +166,18 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+    /**
+     * Action logout current user.
+     *
+     * @return Response
+     */
+    public function actionLogout()
+    {
+        if (!Yii::$app->user->isGuest) {
+            Yii::$app->user->logout();
+        }
+
+        return $this->goHome();
+    }
 }
