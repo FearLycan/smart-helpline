@@ -33,12 +33,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'name',
             'description:ntext',
             [
                 'label' => 'Autor',
-                'value' => $model->author->lastname . ' ' . $model->author->name,
+                'format' => 'raw',
+                'value' => Html::a($model->author->lastname . ' ' . $model->author->name, ['user/view', 'id' => $model->author->id]),
             ],
             'created_at',
             'updated_at',
