@@ -10,9 +10,9 @@ use yii\web\UploadedFile;
 
 class FileForm extends File
 {
-    /**
-     * @var UploadedFile[]
-     */
+    const SCENARIO_CREATE = 'create';
+    const SCENARIO_UPDATE = 'update';
+
     public $files;
     public $category_id;
 
@@ -21,8 +21,11 @@ class FileForm extends File
         return [
             [['files'], 'file', 'skipOnEmpty' => false,
                 'extensions' => 'png, jpg, jpeg, doc, docx, excel, pdf, txt, xlsx, xls',
-                'maxFiles' => 10
+                'maxFiles' => 10, 'on' => static::SCENARIO_CREATE,
             ],
+            [['description'], 'string', 'on' => static::SCENARIO_UPDATE],
+            [['name'], 'string', 'on' => static::SCENARIO_UPDATE],
+            [['name'], 'required', 'on' => static::SCENARIO_UPDATE],
         ];
     }
 
@@ -31,9 +34,9 @@ class FileForm extends File
      */
     public function attributeLabels()
     {
-        return [
+        return array_merge(parent::attributeLabels(), [
             'files' => 'Wybierz pliki do przesłania',
-        ];
+        ]);
     }
 
     public function upload()

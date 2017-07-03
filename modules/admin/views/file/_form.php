@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\admin\models\forms\FileForm;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -12,10 +13,20 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'files[]')->fileInput(['multiple' => true]) ?>
+    <?php if ($model->scenario == FileForm::SCENARIO_CREATE): ?>
+
+        <?= $form->field($model, 'files[]')->fileInput(['multiple' => true]) ?>
+
+    <?php elseif ($model->scenario == FileForm::SCENARIO_UPDATE): ?>
+
+        <?= $form->field($model, 'name')->textInput() ?>
+
+        <?= $form->field($model, 'description')->textarea(['rows' => '6']) ?>
+
+    <?php endif; ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Prześlij na serwer', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Zapisz', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

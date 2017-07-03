@@ -24,7 +24,7 @@ class Helpers
                 'format' => 'raw',
                 'value' => function ($data) {
                     /* @var $data File */
-                    return Html::a($data->name, ['file/download', 'id' => $data->id], [
+                    return Html::a($data->name, ['file/view', 'id' => $data->id], [
                         'data-pjax' => '0'
                     ]);
                 },
@@ -56,6 +56,26 @@ class Helpers
                 'format' => 'raw',
                 'value' => function ($data) {
                     /* @var $data File */
+                    return Html::a('Edytuj', ['file/update', 'id' => $data->id], [
+                        'class' => 'btn btn-primary btn-xs',
+                        'data-pjax' => '0',
+                    ]);
+                },
+            ],
+            [
+                'format' => 'raw',
+                'value' => function ($data) {
+                    /* @var $data File */
+                    return Html::a('Pobierz', ['file/download', 'id' => $data->id], [
+                        'class' => 'btn btn-success btn-xs',
+                        'data-pjax' => '0',
+                    ]);
+                },
+            ],
+            [
+                'format' => 'raw',
+                'value' => function ($data) {
+                    /* @var $data File */
                     return Html::a('Usuń', ['file/delete', 'id' => $data->id], [
                         'class' => 'btn btn-danger btn-xs',
                         'data-pjax' => '0',
@@ -63,7 +83,7 @@ class Helpers
                         'data-method' => 'post',
                     ]);
                 },
-            ]
+            ],
         ];
     }
 

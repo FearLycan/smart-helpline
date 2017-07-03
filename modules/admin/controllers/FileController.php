@@ -58,7 +58,7 @@ class FileController extends Controller
         $category = Category::findOne($id);
         $model = new FileForm();
         $model->category_id = $id;
-
+        $model->scenario = FileForm::SCENARIO_CREATE;
 
         if (Yii::$app->request->isPost) {
             $model->files = UploadedFile::getInstances($model, 'files');
@@ -71,8 +71,6 @@ class FileController extends Controller
                 'category' => $category,
             ]);
         }
-
-        return 0;
     }
 
     /**
@@ -90,6 +88,32 @@ class FileController extends Controller
         $model->delete();
 
         return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionUpdate($id)
+    {
+        $model = FileForm::findOne($id);
+        $model->scenario = FileForm::SCENARIO_UPDATE;
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        }
+    }
+
+    /**
+     * Displays a single File model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
     }
 
     /**
