@@ -33,13 +33,22 @@ $this->params['breadcrumbs'][] = $this->title;
             'class' => 'yii\grid\SerialColumn',
             'contentOptions' => ['style' => 'width: 40px; text-align: center']
         ],
-
         [
             'attribute' => 'name',
             'format' => 'raw',
             'value' => function ($data) {
                 /* @var $data File */
                 return Html::a($data->name, ['site/download', 'id' => $data->id], [
+                    'data-pjax' => '0'
+                ]);
+            },
+        ],
+        [
+            'attribute' => 'description',
+            'format' => 'raw',
+            'value' => function ($data) {
+                /* @var $data File */
+                return Html::a($data->getShortDescription(), ['site/file', 'id' => $data->id], [
                     'data-pjax' => '0'
                 ]);
             },
@@ -55,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
             'attribute' => 'format',
-            'contentOptions' => ['style' => 'width: 100px; text-align: center'],
+            'contentOptions' => ['style' => 'width: 50px; text-align: center'],
         ],
         [
             'attribute' => 'created_at',

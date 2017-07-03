@@ -15,6 +15,7 @@ class FileSearch extends File
     public $format;
     public $created_at;
     public $author;
+    public $description;
 
     /**
      * @inheritdoc
@@ -22,7 +23,7 @@ class FileSearch extends File
     public function rules()
     {
         return [
-            [['name', 'format', 'created_at', 'author'], 'string'],
+            [['name', 'format', 'created_at', 'author', 'description'], 'string'],
         ];
     }
 
@@ -70,6 +71,7 @@ class FileSearch extends File
         $query->andFilterWhere(['like', 'file.name', $this->name])
             ->andFilterWhere(['like', 'file.format', $this->format])
             ->andFilterWhere(['like', 'file.created_at', $this->created_at])
+            ->andFilterWhere(['like', 'file.description', $this->description])
             ->andFilterWhere([
                 'or',
                 ['like', 'author.name', $this->author],

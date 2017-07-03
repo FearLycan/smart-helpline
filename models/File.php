@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\Html;
+use yii\helpers\StringHelper;
 
 /**
  * This is the model class for table "{{%file}}".
@@ -77,5 +79,13 @@ class File extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getShortDescription()
+    {
+        return Html::encode(StringHelper::truncate($this->description, 70, ' [...]'));
     }
 }

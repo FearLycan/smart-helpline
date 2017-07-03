@@ -163,6 +163,15 @@ class SiteController extends Controller
         ]);
     }
 
+    public function actionFile($id)
+    {
+        $model = File::findOne($id);
+
+        return $this->render('file', [
+            'model' => $model,
+        ]);
+    }
+
     /**
      * Action logout current user.
      *
