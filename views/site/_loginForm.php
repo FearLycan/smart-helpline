@@ -24,9 +24,11 @@ $this->title = 'Login';
         <?= $form->field($model, 'password')->passwordInput() ?>
     </div>
 
-    <div class="form-group">
-        <div class="col-lg-offset-1 col-lg-11">
-            <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+    <div class="row">
+        <div class="form-group">
+            <div class="col-md-12">
+                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+            </div>
         </div>
     </div>
 
