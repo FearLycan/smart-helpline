@@ -14,6 +14,7 @@ use Yii;
  * @property int $category_id
  * @property int $author_id
  * @property string $created_at
+ * @property string $description
  *
  * @property User $author
  * @property Category $category
@@ -38,7 +39,7 @@ class File extends \yii\db\ActiveRecord
         return [
             [['category_id', 'author_id'], 'integer'],
             [['created_at'], 'safe'],
-            [['name', 'real_name', 'format'], 'string', 'max' => 255],
+            [['name', 'real_name', 'format','description'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
         ];
     }
@@ -56,6 +57,7 @@ class File extends \yii\db\ActiveRecord
             'category_id' => 'Category ID',
             'author_id' => 'Author ID',
             'created_at' => 'Data utworzenia',
+            'description' => 'Opis pliku',
         ];
     }
 
