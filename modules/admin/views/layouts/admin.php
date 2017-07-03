@@ -29,17 +29,16 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => 'Smart-Helpline Admin Panel',
-        'brandUrl' => ['/admin/user'],
+        'brandUrl' => ['user/index'],
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
 
-
-    $menuItems[] = ['label' => 'Użytkownicy', 'url' => ['/admin/user']];
-    $menuItems[] = ['label' => 'Kategorie', 'url' => ['/admin/category']];
-    $menuItems[] = ['label' => 'Pliki', 'url' => ['/admin/file']];
-    $menuItems[] = ['label' => 'Kontrakty', 'url' => ['/admin/contract']];
+    $menuItems[] = ['label' => 'Użytkownicy', 'url' => ['user/index']];
+    $menuItems[] = ['label' => 'Kategorie', 'url' => ['category/index']];
+    $menuItems[] = ['label' => 'Pliki', 'url' => ['file/index']];
+    $menuItems[] = ['label' => 'Kontrakty', 'url' => ['contract/index']];
 
     if (!Yii::$app->user->isGuest ) {
         $menuItems[] = [
@@ -47,7 +46,7 @@ AppAsset::register($this);
             'options' => ['class' => 'hover'],
             'items' => [
                 ['label' => 'Strona główna', 'url' => ['/site/index']],
-                ['label' => 'Panel Admina', 'url' => ['/admin/user']],
+                ['label' => 'Panel Admina', 'url' => ['/admin/user/index']],
                 '<li class="divider"></li>',
                 ['label' => 'Logout',
                     'url' => ['/site/logout'],
