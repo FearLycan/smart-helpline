@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\admin\models\User;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -33,13 +34,23 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'lastname',
             'email:email',
-            //'password',
-            'role',
-            'status',
+            [
+                'label' => 'Rola',
+                'value' => function ($data) {
+                    /* @var $data User */
+                    return $data->getRoleName();
+                },
+            ],
+            [
+                'label' => 'Status',
+                'value' => function ($data) {
+                    /* @var $data User */
+                    return $data->getStatusName();
+                },
+            ],
             'registered_at',
             'last_login_at',
-            //'auth_key',
-            //'verification_code',
+            'last_seen',
         ],
     ]) ?>
 

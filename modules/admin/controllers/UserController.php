@@ -58,12 +58,10 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
-        //$model = $this->findModel($id);
-
-        //die(var_dump($model->categories));
+        $model = User::findOne($id);
 
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 

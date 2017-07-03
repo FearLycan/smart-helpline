@@ -155,11 +155,7 @@ class SiteController extends Controller
             Yii::$app->user->identity->last_login_at = date('Y-m-d H:i:s');
             Yii::$app->user->identity->save(false, ['last_login_at']);
 
-            if ($model->isAdministrator()) {
-                return $this->redirect(['admin/user']);
-            } else {
-                return $this->redirect(['site/index']);
-            }
+            return $this->goHome();
         }
 
         return $this->render('login', [
