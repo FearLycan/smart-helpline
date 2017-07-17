@@ -60,8 +60,6 @@ AppAsset::register($this);
         ];
     }
 
-    //die(var_dump($menuItems));
-
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => $menuItems,
