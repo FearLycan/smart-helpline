@@ -39,22 +39,28 @@ AppAsset::register($this);
     $menuItems[] = ['label' => '', 'url' => '#'];
 
     if (!Yii::$app->user->isGuest) {
+
+        if (Yii::$app->user->identity->isAdministrator()) {
+            $item = ['label' => 'Panel admina', 'url' => ['admin/user']];
+        } else {
+            $item = ['label' => '', 'url' => '#'];
+        }
+
         $menuItems[] = [
             'label' => Yii::$app->user->identity->name . ' ' . Yii::$app->user->identity->lastname,
             'options' => ['class' => 'hover'],
             'items' => [
                 ['label' => 'Strona główna', 'url' => ['/site/index']],
-                !Yii::$app->user->identity->isAdministrator() ?: (
-                ['label' => 'Panel admina', 'url' => ['admin/user']]
-                ),
+                $item,
                 '<li class="divider"></li>',
-                ['label' => 'Logout',
-                    'url' => ['/site/logout'],
+                ['label' => 'Logout', 'url' => ['/site/logout'],
                     'linkOptions' => ['data-method' => 'post'],
                 ],
-            ]
+            ],
         ];
     }
+
+    //die(var_dump($menuItems));
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
