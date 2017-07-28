@@ -21,6 +21,7 @@ namespace app\models;
  * @property int $author_id
  * @property string $created_at
  * @property string $updated_at
+ * @property string $contract_description
  *
  * @property User $author
  */
@@ -56,8 +57,8 @@ class Contract extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'airline_name' => 'Airline Name',
-            'contract_validity_from' => 'Contract From',
-            'contract_validity_to' => 'Contract To',
+            'contract_validity_from' => 'Contract Validity From',
+            'contract_validity_to' => 'Contract Validity To',
             'routing' => 'Routing',
             'infant_fares' => 'Infant Fares',
             'ticket_designator' => 'Ticket Designator',
@@ -69,6 +70,7 @@ class Contract extends \yii\db\ActiveRecord
             'author_id' => 'Author ID',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+            'contract_description' => 'Contract Description',
         ];
     }
 

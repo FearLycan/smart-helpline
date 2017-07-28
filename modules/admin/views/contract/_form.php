@@ -15,23 +15,33 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'airline_name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'contract_validity_from')->widget(DatePicker::classname(), [
-        'options' => ['placeholder' => 'Wybierz date'],
-        'type' => DatePicker::TYPE_INPUT,
-        'pluginOptions' => [
-            'autoclose' => true,
-            'format' => 'yyyy-mm-dd'
-        ]
-    ]) ?>
+    <div class="row">
+        <div class="col-md-4">
+            <?= $form->field($model, 'contract_validity_from')->widget(DatePicker::classname(), [
+                'options' => ['placeholder' => 'Wybierz date'],
+                'type' => DatePicker::TYPE_INPUT,
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'yyyy-mm-dd'
+                ]
+            ]) ?>
+        </div>
 
-    <?= $form->field($model, 'contract_validity_to')->widget(DatePicker::classname(), [
-        'options' => ['placeholder' => 'Wybierz date'],
-        'type' => DatePicker::TYPE_INPUT,
-        'pluginOptions' => [
-            'autoclose' => true,
-            'format' => 'yyyy-mm-dd'
-        ]
-    ]) ?>
+        <div class="col-md-4">
+            <?= $form->field($model, 'contract_validity_to')->widget(DatePicker::classname(), [
+                'options' => ['placeholder' => 'Wybierz date'],
+                'type' => DatePicker::TYPE_INPUT,
+                'pluginOptions' => [
+                    'autoclose' => true,
+                    'format' => 'yyyy-mm-dd'
+                ]
+            ]) ?>
+        </div>
+
+        <div class="col-md-4">
+            <?= $form->field($model, 'contract_description')->textInput(['maxlength' => true]) ?>
+        </div>
+    </div>
 
     <?= $form->field($model, 'routing')->textInput(['maxlength' => true]) ?>
 

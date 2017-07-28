@@ -29,8 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'airline_name',
-            'contract_validity_from',
-            'contract_validity_to',
+            [
+                'label' => 'Contract Validity',
+                'value' => date("Y-m-d", strtotime($model->contract_validity_from)) . ' to ' . date("Y-m-d", strtotime($model->contract_validity_to)) . ', ' . $model->contract_description,
+            ],
+            // 'contract_validity_from',
+            // 'contract_validity_to',
             'routing',
             'infant_fares',
             'ticket_designator',

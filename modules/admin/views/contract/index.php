@@ -41,6 +41,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'contract_validity_from',
+                'label' => 'Contract From',
                 'contentOptions' => ['style' => 'width: 80px;'],
                 'filter' => '<div class="drp-container input-group">' .
                     DatePicker::widget([
@@ -55,6 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'contract_validity_to',
+                'label' => 'Contract To',
                 'contentOptions' => ['style' => 'width: 80px;'],
                 'filter' => '<div class="drp-container input-group">' .
                     DatePicker::widget([
@@ -78,9 +80,10 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'author',
                 'label' => 'Autor',
+                'format' => 'raw',
                 'value' => function ($data) {
                     /* @var $data Contract */
-                    return $data->author->lastname . ' ' . $data->author->name;
+                    return Html::a($data->author->lastname . ' ' . $data->author->name, ['user/view', 'id' => $data->author->id]);
                 },
 
             ],
