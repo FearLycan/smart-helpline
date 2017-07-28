@@ -2,7 +2,6 @@
 
 namespace app\modules\admin\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -13,7 +12,8 @@ class ContractSearch extends Contract
 {
     public $author;
     public $airline_name;
-    public $contract_validity;
+    public $contract_validity_from;
+    public $contract_validity_to;
     public $routing;
     public $infant_fares;
     public $ticket_designator;
@@ -31,7 +31,7 @@ class ContractSearch extends Contract
     public function rules()
     {
         return [
-            [['airline_name', 'author', 'contract_validity', 'routing', 'infant_fares', 'ticket_designator', 'tour_code',
+            [['airline_name', 'author', 'contract_validity_from', 'contract_validity_to', 'routing', 'infant_fares', 'ticket_designator', 'tour_code',
                 'endorsment', 'interline', 'codeshares', 'created_at', 'updated_at'], 'string'],
             [['mixed_classes'], 'number'],
         ];
@@ -87,7 +87,8 @@ class ContractSearch extends Contract
             ->andFilterWhere(['like', 'interline', $this->interline])
             ->andFilterWhere(['like', 'codeshares', $this->codeshares])
             ->andFilterWhere(['like', 'created_at', $this->created_at])
-            ->andFilterWhere(['like', 'contract_validity', $this->contract_validity])
+            ->andFilterWhere(['like', 'contract_validity_from', $this->contract_validity_from])
+            ->andFilterWhere(['like', 'contract_validity_to', $this->contract_validity_to])
             ->andFilterWhere([
                 'or',
                 ['like', 'author.name', $this->author],

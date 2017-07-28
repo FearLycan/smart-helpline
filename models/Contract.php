@@ -2,14 +2,14 @@
 
 namespace app\models;
 
-use Yii;
 
 /**
  * This is the model class for table "{{%contract}}".
  *
  * @property int $id
  * @property string $airline_name
- * @property string $contract_validity
+ * @property string $contract_validity_from
+ * @property string $contract_validity_to
  * @property string $routing
  * @property string $infant_fares
  * @property string $ticket_designator
@@ -41,10 +41,9 @@ class Contract extends \yii\db\ActiveRecord
     {
         return [
             [['airline_name', 'routing', 'infant_fares', 'ticket_designator', 'tour_code', 'endorsment', 'interline', 'codeshares'], 'required'],
-            [['contract_validity', 'created_at', 'updated_at'], 'safe'],
-            [['mixed_classes'], 'number'],
+            [['contract_validity_from', 'contract_validity_to', 'created_at', 'updated_at'], 'safe'],
             [['author_id'], 'integer'],
-            [['airline_name', 'routing', 'infant_fares', 'ticket_designator', 'tour_code', 'endorsment', 'interline', 'codeshares'], 'string', 'max' => 255],
+            [['mixed_classes', 'airline_name', 'routing', 'infant_fares', 'ticket_designator', 'tour_code', 'endorsment', 'interline', 'codeshares'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
         ];
     }
@@ -57,7 +56,8 @@ class Contract extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'airline_name' => 'Airline Name',
-            'contract_validity' => 'Contract Validity',
+            'contract_validity_from' => 'Contract From',
+            'contract_validity_to' => 'Contract To',
             'routing' => 'Routing',
             'infant_fares' => 'Infant Fares',
             'ticket_designator' => 'Ticket Designator',

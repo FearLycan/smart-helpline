@@ -29,15 +29,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'airline_name',
-            //'contract_validity',
-//            [
-//                'attribute' => 'contract_validity',
-//                'contentOptions' => ['style' => 'width: 160px;'],
-//            ],
+           // 'airline_name',
             [
-                'attribute' => 'contract_validity',
-                'contentOptions' => ['style' => 'width: 160px;'],
+                'attribute' => 'airline_name',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    /* @var $data Contract */
+                    return Html::a($data->airline_name, ['view', 'id' => $data->id]);
+                },
+
+            ],
+            [
+                'attribute' => 'contract_validity_from',
+                'contentOptions' => ['style' => 'width: 80px;'],
                 'filter' => '<div class="drp-container input-group">' .
                     DatePicker::widget([
                         'name' => 'ContractSearch[contract_validity]',
@@ -47,6 +51,21 @@ $this->params['breadcrumbs'][] = $this->title;
                             'format' => 'yyyy-mm-dd'
                         ]
                     ]) . '</div>',
+                'format' => ['date', 'php:Y-m-d']
+            ],
+            [
+                'attribute' => 'contract_validity_to',
+                'contentOptions' => ['style' => 'width: 80px;'],
+                'filter' => '<div class="drp-container input-group">' .
+                    DatePicker::widget([
+                        'name' => 'ContractSearch[contract_validity]',
+                        'type' => DatePicker::TYPE_INPUT,
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                            'format' => 'yyyy-mm-dd'
+                        ]
+                    ]) . '</div>',
+                'format' => ['date', 'php:Y-m-d']
             ],
             //'routing',
             'infant_fares',

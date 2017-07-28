@@ -29,7 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'airline_name',
-            'contract_validity',
+            'contract_validity_from',
+            'contract_validity_to',
             'routing',
             'infant_fares',
             'ticket_designator',
@@ -38,7 +39,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'mixed_classes',
             'interline',
             'codeshares',
-            'author_id',
+            [
+                'label' => 'Autor',
+                'format' => 'raw',
+                'value' => Html::a($model->author->lastname . ' ' . $model->author->name, ['user/view', 'id' => $model->author->id]),
+            ],
             'created_at',
             'updated_at',
         ],

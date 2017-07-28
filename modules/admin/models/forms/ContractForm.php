@@ -3,7 +3,6 @@
 namespace app\modules\admin\models\forms;
 
 use app\modules\admin\models\Contract;
-use Yii;
 
 /**
  * This is the model class for table "{{%contract}}".
@@ -19,7 +18,7 @@ class ContractForm extends Contract
     {
         return [
             [['airline_name', 'routing', 'infant_fares', 'ticket_designator', 'tour_code', 'endorsment', 'interline', 'codeshares'], 'required'],
-            [['contract_validity'], 'safe'],
+            [['contract_validity_from','contract_validity_to'], 'safe'],
             [['mixed_classes','airline_name', 'routing', 'infant_fares', 'ticket_designator', 'tour_code', 'endorsment', 'interline', 'codeshares'], 'string', 'max' => 255],
         ];
     }
