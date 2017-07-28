@@ -20,8 +20,7 @@ class ContractForm extends Contract
         return [
             [['airline_name', 'routing', 'infant_fares', 'ticket_designator', 'tour_code', 'endorsment', 'interline', 'codeshares'], 'required'],
             [['contract_validity'], 'safe'],
-            [['mixed_classes'], 'number'],
-            [['airline_name', 'routing', 'infant_fares', 'ticket_designator', 'tour_code', 'endorsment', 'interline', 'codeshares'], 'string', 'max' => 255],
+            [['mixed_classes','airline_name', 'routing', 'infant_fares', 'ticket_designator', 'tour_code', 'endorsment', 'interline', 'codeshares'], 'string', 'max' => 255],
         ];
     }
 }
