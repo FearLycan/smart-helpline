@@ -44,8 +44,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     return Html::a($data->author->lastname . ' ' . $data->author->name, ['user/view', 'id' => $data->author->id]);
                 },
             ],
-            'created_at',
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute' => 'created_at',
+                'contentOptions' => ['style' => 'width: 160px;'],
+            ],
+           //'created_at',
+            ['class' => 'yii\grid\ActionColumn', 'contentOptions' => ['style' => 'width: 80px;'],],
         ],
     ]); ?>
     <?php Pjax::end(); ?>
