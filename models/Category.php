@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\helpers\Html;
 use yii\helpers\StringHelper;
 
@@ -82,6 +81,6 @@ class Category extends \yii\db\ActiveRecord
      */
     public function getShortDescription()
     {
-        return Html::encode(StringHelper::truncate($this->description, 85, ' [...]'));
+        return Html::encode(StringHelper::truncate(strip_tags($this->description), 85, ' [...]'));
     }
 }

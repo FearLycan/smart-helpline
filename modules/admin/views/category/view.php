@@ -34,7 +34,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'name',
-            'description:ntext',
+            [
+                'label' => 'Opis',
+                'format' => 'raw',
+                'value' => $model->description
+            ],
+            //'description:ntext',
             [
                 'label' => 'Autor',
                 'format' => 'raw',

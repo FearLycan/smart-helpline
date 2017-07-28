@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <h1><?= $this->title ?></h1>
 
-<p><?= Html::encode($category->description) ?></p>
+<p><?= $category->description ?></p>
 <p><strong>Autor: </strong><?= Html::encode($category->author->name . ' ' . $category->author->lastname) ?></p>
 <p><strong>Data publikacji: </strong><?= Html::encode($category->created_at) ?></p>
 <p><strong>Ostatnia aktualizacja: </strong><?= Html::encode($category->updated_at) ?></p>
