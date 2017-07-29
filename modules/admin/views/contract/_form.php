@@ -1,5 +1,7 @@
 <?php
 
+use app\modules\admin\components\Helpers;
+use dosamigos\tinymce\TinyMce;
 use kartik\date\DatePicker;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -63,20 +65,47 @@ use yii\widgets\ActiveForm;
 
     </div>
 
+    <?= $form->field($model, 'infant_fares')->widget(TinyMce::className(), [
+        'options' => ['rows' => 3],
+        'language' => 'pl',
+        'clientOptions' => Helpers::getTinyMceOptions()
+    ]); ?>
 
-    <?= $form->field($model, 'infant_fares')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'ticket_designator')->widget(TinyMce::className(), [
+        'options' => ['rows' => 3],
+        'language' => 'pl',
+        'clientOptions' => Helpers::getTinyMceOptions()
+    ]); ?>
 
-    <?= $form->field($model, 'ticket_designator')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'tour_code')->widget(TinyMce::className(), [
+        'options' => ['rows' => 3],
+        'language' => 'pl',
+        'clientOptions' => Helpers::getTinyMceOptions()
+    ]); ?>
 
-    <?= $form->field($model, 'tour_code')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'endorsment')->widget(TinyMce::className(), [
+        'options' => ['rows' => 3],
+        'language' => 'pl',
+        'clientOptions' => Helpers::getTinyMceOptions()
+    ]); ?>
 
-    <?= $form->field($model, 'endorsment')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'mixed_classes')->widget(TinyMce::className(), [
+        'options' => ['rows' => 3],
+        'language' => 'pl',
+        'clientOptions' => Helpers::getTinyMceOptions()
+    ]); ?>
 
-    <?= $form->field($model, 'mixed_classes')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'interline')->widget(TinyMce::className(), [
+        'options' => ['rows' => 3],
+        'language' => 'pl',
+        'clientOptions' => Helpers::getTinyMceOptions()
+    ]); ?>
 
-    <?= $form->field($model, 'interline')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'codeshares')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'codeshares')->widget(TinyMce::className(), [
+        'options' => ['rows' => 3],
+        'language' => 'pl',
+        'clientOptions' => Helpers::getTinyMceOptions()
+    ]); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Zapisz', ['class' => 'btn btn-success']) ?>
