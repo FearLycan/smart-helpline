@@ -39,8 +39,14 @@ AppAsset::register($this);
     $menuItems[] = ['label' => 'Kategorie', 'url' => ['category/index']];
     $menuItems[] = ['label' => 'Pliki', 'url' => ['file/index']];
     $menuItems[] = ['label' => 'Kontrakty', 'url' => ['contract/index']];
+//    $menuItems[] = ['label' => 'Kontrakty',
+//        'items' => [
+//            ['label' => 'Lista kontraktów', 'url' => ['contract/index']],
+//            ['label' => 'Kategorie kontraktów', 'url' => ['routing-category/index']],
+//        ]
+//    ];
 
-    if (!Yii::$app->user->isGuest ) {
+    if (!Yii::$app->user->isGuest) {
         $menuItems[] = [
             'label' => Yii::$app->user->identity->name . ' ' . Yii::$app->user->identity->lastname,
             'options' => ['class' => 'hover'],
