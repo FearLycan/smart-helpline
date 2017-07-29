@@ -1,6 +1,8 @@
 <?php
 
+use app\modules\admin\components\Helpers;
 use app\modules\admin\models\forms\FileForm;
+use dosamigos\tinymce\TinyMce;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -21,7 +23,11 @@ use yii\widgets\ActiveForm;
 
         <?= $form->field($model, 'name')->textInput() ?>
 
-        <?= $form->field($model, 'description')->textarea(['rows' => '6']) ?>
+        <?= $form->field($model, 'description')->widget(TinyMce::className(), [
+            'options' => ['rows' => 6],
+            'language' => 'pl',
+            'clientOptions' => Helpers::getTinyMceOptions()
+        ]); ?>
 
     <?php endif; ?>
 

@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use app\modules\admin\components\Controller;
 use app\modules\admin\models\Category;
+use app\modules\admin\models\Contract;
 use app\modules\admin\models\forms\FileForm;
 use Yii;
 use app\modules\admin\models\File;
@@ -53,22 +54,34 @@ class FileController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id)
+    public function actionCreate($id, $contractId = null)
     {
+        $contract = null;
+
+        if (!empty($contractId)) {
+            $contract = Contract::findOne($contractId);
+        }
+
         $category = Category::findOne($id);
         $model = new FileForm();
         $model->category_id = $id;
+        $model->contract_id = $contractId;
         $model->scenario = FileForm::SCENARIO_CREATE;
 
         if (Yii::$app->request->isPost) {
             $model->files = UploadedFile::getInstances($model, 'files');
             if ($model->upload()) {
-                return $this->redirect(['category/view', 'id' => $id]);
+                if (!empty($contract)) {
+                    return $this->redirect(['contract/view', 'id' => $contractId]);
+                } else {
+                    return $this->redirect(['category/view', 'id' => $id]);
+                }
             }
         } else {
             return $this->render('create', [
                 'model' => $model,
                 'category' => $category,
+                'contract' => $contract,
             ]);
         }
     }

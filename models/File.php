@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\helpers\Html;
 use yii\helpers\StringHelper;
 
@@ -15,6 +14,7 @@ use yii\helpers\StringHelper;
  * @property string $format
  * @property int $category_id
  * @property int $author_id
+ * @property int $contract_id
  * @property string $created_at
  * @property string $updated_at
  * @property string $description
@@ -40,7 +40,7 @@ class File extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'author_id'], 'integer'],
+            [['category_id', 'author_id','contract_id'], 'integer'],
             [['created_at'], 'safe'],
             [['name', 'real_name', 'format', 'description'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],

@@ -3,6 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\modules\admin\components\Controller;
+use app\modules\admin\models\File;
 use app\modules\admin\models\forms\ContractForm;
 use Yii;
 use app\modules\admin\models\Contract;
@@ -52,8 +53,14 @@ class ContractController extends Controller
      */
     public function actionView($id)
     {
+
+        $files = File::find()
+            ->where(['contract_id' => $id])
+            ->all();
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'files' => $files,
         ]);
     }
 

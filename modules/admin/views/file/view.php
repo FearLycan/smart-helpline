@@ -1,7 +1,6 @@
 <?php
 
-use app\modules\admin\components\Helpers;
-use yii\grid\GridView;
+use app\modules\admin\models\File;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -43,7 +42,14 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'label' => 'Kategoria',
                 'format' => 'raw',
-                'value' => Html::a($model->category->name, ['category/view', 'id' => $model->category->id]),
+                'value' => function ($model) {
+                    /* @var $data File */
+                    if ($model->category_id != 0) {
+                        return Html::a($model->category->name, ['category/view', 'id' => $model->category_id]);
+                    } else {
+                        return Html::a('Kontrakt', ['contract/view', 'id' => $model->contract_id]);
+                    }
+                },
             ],
             'created_at',
             'updated_at',

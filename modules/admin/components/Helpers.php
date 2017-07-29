@@ -39,7 +39,11 @@ class Helpers
                 'format' => 'raw',
                 'value' => function ($data) {
                     /* @var $data File */
-                    return Html::a($data->category->name, ['category/view', 'id' => $data->category_id]);
+                    if ($data->category_id != 0) {
+                        return Html::a($data->category->name, ['category/view', 'id' => $data->category_id]);
+                    } else {
+                        return Html::a('Kontrakt', ['contract/view', 'id' => $data->contract_id]);
+                    }
                 },
             ],
             [
@@ -105,6 +109,25 @@ class Helpers
                 'created_at',
                 ['class' => 'yii\grid\ActionColumn'],
             ]
+        ];
+    }
+
+    public static function getTinyMceOptions()
+    {
+        return [
+            //'menubar' => false,
+            'plugins' => [
+                "advlist autolink lists link charmap print preview anchor",
+                "searchreplace visualblocks code",
+                "insertdatetime media table paste",
+                "emoticons paste textcolor colorpicker textpattern imagetools codesample toc help"
+            ],
+
+            'content_css' => [
+                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                '//www.tinymce.com/css/codepen.min.css',
+            ],
+            'toolbar' => "bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor backcolor emoticons"
         ];
     }
 }

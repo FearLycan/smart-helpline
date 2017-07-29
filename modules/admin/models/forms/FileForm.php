@@ -6,7 +6,6 @@ namespace app\modules\admin\models\forms;
 
 use app\modules\admin\models\File;
 use Yii;
-use yii\web\UploadedFile;
 
 class FileForm extends File
 {
@@ -15,6 +14,7 @@ class FileForm extends File
 
     public $files;
     public $category_id;
+    public $contract_id;
 
     public function rules()
     {
@@ -55,6 +55,7 @@ class FileForm extends File
                 $f->name = $name;
                 $f->real_name = $real_name;
                 $f->category_id = $this->category_id;
+                $f->contract_id = $this->contract_id;
                 $f->format = $file->extension;
                 $f->save();
 
