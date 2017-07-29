@@ -22,6 +22,10 @@ namespace app\models;
  * @property string $created_at
  * @property string $updated_at
  * @property string $contract_description
+ * @property string $routing_subcat_1
+ * @property string $routing_subcat_1_description
+ * @property string $routing_subcat_2
+ * @property string $routing_subcat_2_description
  *
  * @property User $author
  */
@@ -44,7 +48,10 @@ class Contract extends \yii\db\ActiveRecord
             [['airline_name', 'routing', 'infant_fares', 'ticket_designator', 'tour_code', 'endorsment', 'interline', 'codeshares'], 'required'],
             [['contract_validity_from', 'contract_validity_to', 'created_at', 'updated_at'], 'safe'],
             [['author_id'], 'integer'],
-            [['mixed_classes', 'airline_name', 'routing', 'infant_fares', 'ticket_designator', 'tour_code', 'endorsment', 'interline', 'codeshares'], 'string', 'max' => 255],
+            [[
+                'routing_subcat_1', 'routing_subcat_1', 'routing_subcat_1_description','routing_subcat_2_description', 'mixed_classes', 'airline_name', 'routing', 'infant_fares', 'ticket_designator',
+                'tour_code', 'endorsment', 'interline', 'codeshares'
+            ], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
         ];
     }

@@ -43,7 +43,26 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 
-    <?= $form->field($model, 'routing')->textInput(['maxlength' => true]) ?>
+    <div class="row">
+
+        <div class="col-md-6">
+            <?= $form->field($model, 'routing_subcat_1')->textInput(['maxlength' => true])->label('Between No. 1') ?>
+        </div>
+
+        <div class="col-md-6">
+            <?= $form->field($model, 'routing_subcat_1_description')->textInput(['maxlength' => true])->label('Between No. 1 Description') ?>
+        </div>
+
+        <div class="col-md-6">
+            <?= $form->field($model, 'routing_subcat_2')->textInput(['maxlength' => true])->label('Between No. 2') ?>
+        </div>
+
+        <div class="col-md-6">
+            <?= $form->field($model, 'routing_subcat_2_description')->textInput(['maxlength' => true])->label('Between No. 2 Description') ?>
+        </div>
+
+    </div>
+
 
     <?= $form->field($model, 'infant_fares')->textInput(['maxlength' => true]) ?>
 

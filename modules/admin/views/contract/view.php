@@ -35,7 +35,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             // 'contract_validity_from',
             // 'contract_validity_to',
-            'routing',
+            //'routing',
+            [
+                'label' => 'Routing No. 1',
+                'value' => $model->routing_subcat_1 . ' ' . $model->routing_subcat_1_description
+            ],
+            [
+                'label' => 'Routing No. 2',
+                'value' => $model->routing_subcat_2 . ' ' . $model->routing_subcat_2_description
+            ],
+            //'routing_subcat_1',
+            //'routing_subcat_2',
             'infant_fares',
             'ticket_designator',
             'tour_code',
