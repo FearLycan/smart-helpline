@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'name',
-            'description:ntext',
+            'description',
             [
                 'label' => 'Autor',
                 'format' => 'raw',
