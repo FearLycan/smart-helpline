@@ -69,43 +69,49 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'infant_fares')->widget(TinyMce::className(), [
         'options' => ['rows' => 3],
-        'language' => 'pl',
+        'language' => 'en',
         'clientOptions' => Helpers::getTinyMceOptions()
     ]); ?>
 
     <?= $form->field($model, 'ticket_designator')->widget(TinyMce::className(), [
         'options' => ['rows' => 3],
-        'language' => 'pl',
+        'language' => 'en',
         'clientOptions' => Helpers::getTinyMceOptions()
     ]); ?>
 
     <?= $form->field($model, 'tour_code')->widget(TinyMce::className(), [
         'options' => ['rows' => 3],
-        'language' => 'pl',
+        'language' => 'en',
         'clientOptions' => Helpers::getTinyMceOptions()
     ]); ?>
 
     <?= $form->field($model, 'endorsment')->widget(TinyMce::className(), [
         'options' => ['rows' => 3],
-        'language' => 'pl',
+        'language' => 'en',
         'clientOptions' => Helpers::getTinyMceOptions()
     ]); ?>
 
     <?= $form->field($model, 'mixed_classes')->widget(TinyMce::className(), [
         'options' => ['rows' => 3],
-        'language' => 'pl',
+        'language' => 'en',
         'clientOptions' => Helpers::getTinyMceOptions()
     ]); ?>
 
     <?= $form->field($model, 'interline')->widget(TinyMce::className(), [
         'options' => ['rows' => 3],
-        'language' => 'pl',
+        'language' => 'en',
         'clientOptions' => Helpers::getTinyMceOptions()
     ]); ?>
 
     <?= $form->field($model, 'codeshares')->widget(TinyMce::className(), [
         'options' => ['rows' => 3],
-        'language' => 'pl',
+        'language' => 'en',
+        'clientOptions' => Helpers::getTinyMceOptions()
+    ]); ?>
+
+    <?= $form->field($model, 'note')->widget(TinyMce::className(), [
+        'options' => ['rows' => 5],
+        'language' => 'en',
         'clientOptions' => Helpers::getTinyMceOptions()
     ]); ?>
 
