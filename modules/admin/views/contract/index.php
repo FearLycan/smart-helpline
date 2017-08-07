@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-           // 'airline_name',
+            // 'airline_name',
             [
                 'attribute' => 'airline_name',
                 'format' => 'raw',
@@ -70,7 +70,15 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => ['date', 'php:Y-m-d']
             ],
             //'routing',
-            'infant_fares',
+            [
+                'attribute' => 'infant_fares',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    /* @var $data Contract */
+                    return $data->infant_fares;
+                },
+            ],
+            //'infant_fares',
             // 'ticket_designator',
             //'tour_code',
             // 'endorsment',

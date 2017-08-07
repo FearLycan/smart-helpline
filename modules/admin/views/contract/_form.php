@@ -15,6 +15,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?= $form->errorSummary($model); ?>
+
     <?= $form->field($model, 'airline_name')->textInput(['maxlength' => true]) ?>
 
     <div class="row">
