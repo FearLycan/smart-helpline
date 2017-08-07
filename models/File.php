@@ -88,4 +88,12 @@ class File extends \yii\db\ActiveRecord
     {
         return Html::encode(StringHelper::truncate($this->description, 70, ' [...]'));
     }
+
+    /**
+     * @return bool
+     */
+    public function hasContract()
+    {
+        return !empty($this->contract_id);
+    }
 }

@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style' => 'width: 80px;'],
                 'filter' => '<div class="drp-container input-group">' .
                     DatePicker::widget([
-                        'name' => 'ContractSearch[contract_validity]',
+                        'name' => 'ContractSearch[contract_validity_from]',
                         'type' => DatePicker::TYPE_INPUT,
                         'pluginOptions' => [
                             'autoclose' => true,
@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style' => 'width: 80px;'],
                 'filter' => '<div class="drp-container input-group">' .
                     DatePicker::widget([
-                        'name' => 'ContractSearch[contract_validity]',
+                        'name' => 'ContractSearch[contract_validity_to]',
                         'type' => DatePicker::TYPE_INPUT,
                         'pluginOptions' => [
                             'autoclose' => true,

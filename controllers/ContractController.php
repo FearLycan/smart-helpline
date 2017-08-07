@@ -1,17 +1,16 @@
 <?php
 
-namespace app\Controllers;
+namespace app\controllers;
 
-use Yii;
+
+use app\components\Controller;
 use app\models\Contract;
 use app\models\ContractSearch;
-use yii\web\Controller;
-use yii\web\NotFoundHttpException;
+use app\models\File;
+use Yii;
 use yii\filters\VerbFilter;
+use yii\web\NotFoundHttpException;
 
-/**
- * ContractController implements the CRUD actions for Contract model.
- */
 class ContractController extends Controller
 {
     /**
@@ -51,8 +50,13 @@ class ContractController extends Controller
      */
     public function actionView($id)
     {
+        $files = File::find()
+            ->where(['contract_id' => $id])
+            ->all();
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'files' => $files
         ]);
     }
 

@@ -11,6 +11,7 @@ use app\models\User;
 use Yii;
 use app\components\Controller;
 use yii\filters\VerbFilter;
+use yii\validators\ValidationAsset;
 use yii\web\NotFoundHttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
@@ -117,7 +118,17 @@ class SiteController extends Controller
     {
         $model = File::findOne($id);
 
-        if (empty($model) || !Yii::$app->user->identity->canSeeThisCategory($model->category_id)) {
+        if($model->hasContract()){
+            $path = Yii::getAlias('@app/web/files/' . $model->real_name);
+
+            if (file_exists($path)) {
+                return Yii::$app->response->sendFile($path, $model->name . '.' . $model->format);
+            } else {
+                $this->notFound();
+            }
+        }
+
+        if (empty($model) || !Yii::$app->user->identity->canSeeThisCategory($model->category_id) || !$model->hasContract()) {
             $this->accessDenied();
         } else {
             $path = Yii::getAlias('@app/web/files/' . $model->real_name);

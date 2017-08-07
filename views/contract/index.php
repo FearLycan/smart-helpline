@@ -1,5 +1,7 @@
 <?php
 
+use app\models\Contract;
+use kartik\date\DatePicker;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -16,19 +18,51 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php Pjax::begin(); ?>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Contract', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'airline_name',
-            'contract_validity_from',
+            [
+                'attribute' => 'airline_name',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    /* @var $data Contract */
+                    return Html::a($data->airline_name, ['contract/view', 'id' => $data->id]);
+                },
+                'contentOptions' => ['style' => 'width: 200px;'],
+            ],
+            [
+                'attribute' => 'contract_validity_from',
+                'label' => 'Contract From',
+                'contentOptions' => ['style' => 'width: 80px;'],
+                'filter' => '<div class="drp-container input-group">' .
+                    DatePicker::widget([
+                        'name' => 'ContractSearch[contract_validity_from]',
+                        'type' => DatePicker::TYPE_INPUT,
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                            'format' => 'yyyy-mm-dd'
+                        ]
+                    ]) . '</div>',
+                'format' => ['date', 'php:Y-m-d']
+            ],
+            [
+                'attribute' => 'contract_validity_to',
+                'label' => 'Contract To',
+                'contentOptions' => ['style' => 'width: 80px;'],
+                'filter' => '<div class="drp-container input-group">' .
+                    DatePicker::widget([
+                        'name' => 'ContractSearch[contract_validity_to]',
+                        'type' => DatePicker::TYPE_INPUT,
+                        'pluginOptions' => [
+                            'autoclose' => true,
+                            'format' => 'yyyy-mm-dd'
+                        ]
+                    ]) . '</div>',
+                'format' => ['date', 'php:Y-m-d']
+            ],
             'routing',
             'infant_fares',
             // 'ticket_designator',
@@ -47,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'routing_subcat_2',
             // 'routing_subcat_2_description',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
     <?php Pjax::end(); ?>
