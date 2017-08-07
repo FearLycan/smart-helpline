@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn','contentOptions' => ['style' => 'width: 40px;']],
+            ['class' => 'yii\grid\SerialColumn', 'contentOptions' => ['style' => 'width: 40px;']],
             [
                 'label' => 'Nazwisko',
                 'attribute' => 'lastname',
@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'last_seen',
                 'contentOptions' => ['style' => 'width: 160px;'],
             ],
-           // 'lastname',
+            // 'lastname',
             //'email:email',
             // 'password',
             // 'role',
@@ -82,7 +82,10 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'auth_key',
             // 'verification_code',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'contentOptions' => ['style' => 'width: 70px;']
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

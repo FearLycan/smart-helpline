@@ -46,6 +46,8 @@ AppAsset::register($this);
             $item = ['label' => '', 'url' => '#'];
         }
 
+        $menuItems[] = ['label' => 'Contracts', 'url' => ['contract/index']];
+
         $menuItems[] = [
             'label' => Yii::$app->user->identity->name . ' ' . Yii::$app->user->identity->lastname,
             'options' => ['class' => 'hover'],
