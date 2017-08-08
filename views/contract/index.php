@@ -65,14 +65,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => ['date', 'php:Y-m-d']
             ],
             [
-                'routing' => 'routing',
+                'attribute' => 'routing',
                 'value' => function ($data) {
                     /* @var $data Contract */
                     return Html::encode($data->routing);
                 },
             ],
             [
-                'routing' => 'infant_fares',
+                'attribute' => 'infant_fares',
                 'value' => function ($data) {
                     /* @var $data Contract */
                     return Html::encode($data->infant_fares);
