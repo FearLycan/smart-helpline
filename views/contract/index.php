@@ -5,6 +5,7 @@ use kartik\date\DatePicker;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
+
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ContractSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
@@ -63,8 +64,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]) . '</div>',
                 'format' => ['date', 'php:Y-m-d']
             ],
-            'routing',
-            'infant_fares',
+            [
+                'routing' => 'routing',
+                'value' => function ($data) {
+                    /* @var $data Contract */
+                    return Html::encode($data->routing);
+                },
+            ],
+            [
+                'routing' => 'infant_fares',
+                'value' => function ($data) {
+                    /* @var $data Contract */
+                    return Html::encode($data->infant_fares);
+                },
+            ],
+            //'routing',
+            //'infant_fares',
             // 'ticket_designator',
             // 'tour_code',
             // 'endorsment',

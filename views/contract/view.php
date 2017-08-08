@@ -47,6 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'value' => Html::a($model->author->lastname . ' ' . $model->author->name, ['user/view', 'id' => $model->author->id]),
             ],
+            'note:raw',
             'created_at',
             'updated_at',
         ],
