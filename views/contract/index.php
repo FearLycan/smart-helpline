@@ -68,14 +68,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'routing',
                 'value' => function ($data) {
                     /* @var $data Contract */
-                    return Html::encode($data->routing);
+                    return strip_tags($data->routing);
                 },
             ],
             [
                 'attribute' => 'infant_fares',
                 'value' => function ($data) {
                     /* @var $data Contract */
-                    return Html::encode($data->infant_fares);
+                    return strip_tags($data->infant_fares);
                 },
             ],
             //'routing',
