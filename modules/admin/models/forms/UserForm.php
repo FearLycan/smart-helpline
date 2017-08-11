@@ -68,8 +68,8 @@ class UserForm extends User
             'email' => 'Adres e-mail',
             'password' => 'Hasło',
             'message' => 'Wyślij dane do logowania użytkownikowi',
-            'categories_list' => 'Wybierz kategorie dla tego użytkownika1',
-            'contract_list' => 'Wybierz kontrakty dla tego użytkownika1',
+            'categories_list' => 'Wybierz kategorie dla tego użytkownika',
+            'contract_list' => 'Wybierz kontrakty dla tego użytkownika',
         ];
     }
 
