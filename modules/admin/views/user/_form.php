@@ -71,6 +71,17 @@ use yii\widgets\ActiveForm;
         </div>
 
         <div class="col-md-12">
+            <?= $form->field($model, 'contract_list')
+                ->checkboxList(ArrayHelper::map(app\modules\admin\models\Contract::find()->all(), "id", "airline_name"), ['itemOptions' => [
+                    'class' => 'checkbox-space',
+                ]]); ?>
+        </div>
+
+        <div class="col-md-12">
+            <hr>
+        </div>
+
+        <div class="col-md-12">
             <?= $form->field($model, 'message')->checkbox(); ?>
         </div>
 
@@ -89,7 +100,7 @@ use yii\widgets\ActiveForm;
 
     function random(n) {
         var text = "";
-        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*";
+        var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%&";
 
         for (var i = 0; i < n; i++)
             text += possible.charAt(Math.floor(Math.random() * possible.length));

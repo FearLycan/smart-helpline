@@ -2,10 +2,8 @@
 
 namespace app\models;
 
-use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Contract;
 
 /**
  * ContractSearch represents the model behind the search form of `app\models\Contract`.
@@ -39,9 +37,9 @@ class ContractSearch extends Contract
      *
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($params, $query)
     {
-        $query = Contract::find();
+        //$query = Contract::find();
 
         // add conditions that should always apply here
 

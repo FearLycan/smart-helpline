@@ -90,4 +90,12 @@ class Contract extends \yii\db\ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'author_id']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getLinkedUsers()
+    {
+        return $this->hasMany(UserContract::className(), ['contract_id' => 'id']);
+    }
 }

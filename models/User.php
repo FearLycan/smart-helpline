@@ -23,6 +23,7 @@ use yii\web\IdentityInterface;
  * @property string $auth_key
  * @property string $verification_code
  * @property UserCategory[] $categories
+ * @property UserContract[] $contracts
  *
  * @author Damian Brończyk <damian.bronczyk@gmail.pl>
  */
@@ -152,6 +153,14 @@ class User extends ActiveRecord implements IdentityInterface
     public function getCategories()
     {
         return $this->hasMany(UserCategory::className(), ['user_id' => 'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getContracts()
+    {
+        return $this->hasMany(UserContract::className(), ['user_id' => 'id']);
     }
 
     /**

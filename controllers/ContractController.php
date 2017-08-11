@@ -34,8 +34,13 @@ class ContractController extends Controller
      */
     public function actionIndex()
     {
+        $query = Contract::find()
+            ->joinWith('linkedUsers cat')
+            ->where(['cat.user_id' => Yii::$app->user->identity->id]);
+
+
         $searchModel = new ContractSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
 
         return $this->render('index', [
             'searchModel' => $searchModel,

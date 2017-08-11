@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use app\models\UserCategory;
 use app\modules\admin\components\Controller;
 use app\modules\admin\models\forms\UserForm;
+use app\modules\admin\models\UserContract;
 use Yii;
 use app\modules\admin\models\User;
 use app\modules\admin\models\UserSearch;
@@ -82,8 +83,6 @@ class UserController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
 
-            //die(var_dump($model->categories));
-
             if ($model->message == UserForm::SEND_MESSAGE) {
                 $model->sendEmail();
             }
@@ -107,6 +106,7 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
+        /* @var $model UserForm */
         $model = $this->findModel($id);
         $copy_password = $model->password;
         $model->password = null;
@@ -116,6 +116,13 @@ class UserController extends Controller
             ->select(['category_id'])
             ->asArray()->all(),
             'category_id'
+        );
+
+        $model->contract_list = ArrayHelper::getColumn(UserContract::find()
+            ->where(['user_id' => $id])
+            ->select(['contract_id'])
+            ->asArray()->all(),
+            'contract_id'
         );
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {

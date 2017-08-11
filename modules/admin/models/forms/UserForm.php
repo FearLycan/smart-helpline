@@ -4,13 +4,16 @@
 namespace app\modules\admin\models\forms;
 
 
-use app\models\UserCategory;
 use app\modules\admin\models\User;
+use app\modules\admin\models\UserCategory;
+use app\modules\admin\models\UserContract;
 use Yii;
 
 /**
  * UserForm model for admin panel.
  * @property int $message
+ * @property array $contract_list
+ * @property array $categories_list
  *
  * @author Damian Brończyk <damian.bronczyk@gmail.pl>
  */
@@ -21,6 +24,8 @@ class UserForm extends User
     public $message;
 
     public $categories_list;
+
+    public $contract_list;
 
     const SEND_MESSAGE = 1;
 
@@ -43,7 +48,7 @@ class UserForm extends User
             [['name', 'lastname', 'password', 'email'], 'string'],
             [['email', 'name', 'lastname'], 'required'],
             [['password'], 'required', 'on' => static::SCENARIO_CREATE],
-            [['categories_list'], 'required'],
+            [['categories_list', 'contract_list'], 'required'],
             ['email', 'email'],
             ['email', 'unique'],
             [['message'], 'integer'],
@@ -61,7 +66,8 @@ class UserForm extends User
             'email' => 'Adres e-mail',
             'password' => 'Hasło',
             'message' => 'Wyślij dane do logowania użytkownikowi',
-            'categories' => 'Wybierz kategorie dla tego użytkownika',
+            'categories_list' => 'Wybierz kategorie dla tego użytkownika1',
+            'contract_list' => 'Wybierz kontrakty dla tego użytkownika1',
         ];
     }
 
@@ -84,16 +90,27 @@ class UserForm extends User
     {
         parent::afterSave($insert, $changedAttributes);
 
-        foreach ($this->categories_list as $category) {
-            $link = UserCategory::find()->where(['user_id' => $this->id, 'category_id' => $category])->one();
 
-            if (empty($link)) {
-                $link = new UserCategory();
-                $link->category_id = $category;
-                $link->user_id = $this->id;
-                $link->save();
-            }
-            unset($link);
+        UserCategory::deleteAllCategories($this->id);
+
+        foreach ($this->categories_list as $category) {
+
+            $link = new UserCategory();
+            $link->category_id = $category;
+            $link->user_id = $this->id;
+            $link->save();
+
+        }
+
+        UserContract::deleteAllContracts($this->id);
+
+        foreach ($this->contract_list as $contract) {
+
+            $link = new UserContract();
+            $link->contract_id = $contract;
+            $link->user_id = $this->id;
+            $link->save();
+
         }
     }
 }

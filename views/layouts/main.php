@@ -46,6 +46,7 @@ AppAsset::register($this);
             $item = ['label' => '', 'url' => '#'];
         }
 
+        $menuItems[] = ['label' => 'Categories', 'url' => ['site/index']];
         $menuItems[] = ['label' => 'Contracts', 'url' => ['contract/index']];
 
         $menuItems[] = [

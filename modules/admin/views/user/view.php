@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Kategoria</th>
+                        <th width="400">Kategoria</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -94,6 +94,49 @@ $this->params['breadcrumbs'][] = $this->title;
                 </table>
             <?php else: ?>
                 <p>Brak przypisanych kategorii</p>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Kontrakty do któych należy użytkownik</h3>
+
+            <?php if ($model->categories): ?>
+                <table class="table table-striped table-hover">
+
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th width="400">Kontrakty</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <?php foreach ($model->contracts as $key => $contract): ?>
+                        <?php /* @var $contract \app\modules\admin\models\Contract */ ?>
+                        <tr>
+                            <td><?= $key + 1 ?></td>
+                            <td> <?= Html::a($contract->contract->airline_name, ['contract/view', 'id' => $contract->contract_id]) ?> </td>
+                            <td>
+                                <?= Html::a('Usuń użytkownika z tej kategorii', ['user/delete-link-category',
+                                    'user_id' => $contract->user_id,
+                                    'contract_id' => $contract->contract_id
+                                ],
+                                    [
+                                        'class' => 'btn btn-danger btn-xs',
+                                        'data-confirm' => 'Czy na pewno usunąć ten element?',
+                                        'data-method' => 'post'
+                                    ]
+                                ) ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p>Brak przypisanych kontraktów</p>
             <?php endif; ?>
         </div>
     </div>

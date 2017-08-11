@@ -32,12 +32,12 @@ $this->params['breadcrumbs'][] = $this->title;
                     /* @var $data Contract */
                     return Html::a($data->airline_name, ['contract/view', 'id' => $data->id]);
                 },
-                'contentOptions' => ['style' => 'width: 200px;'],
+                'contentOptions' => ['style' => 'width: 400px;'],
             ],
             [
                 'attribute' => 'contract_validity_from',
                 'label' => 'Contract From',
-                'contentOptions' => ['style' => 'width: 80px;'],
+                'contentOptions' => ['style' => 'width: 120px;'],
                 'filter' => '<div class="drp-container input-group">' .
                     DatePicker::widget([
                         'name' => 'ContractSearch[contract_validity_from]',
@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'contract_validity_to',
                 'label' => 'Contract To',
-                'contentOptions' => ['style' => 'width: 80px;'],
+                'contentOptions' => ['style' => 'width: 120px;'],
                 'filter' => '<div class="drp-container input-group">' .
                     DatePicker::widget([
                         'name' => 'ContractSearch[contract_validity_to]',
