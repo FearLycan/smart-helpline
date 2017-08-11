@@ -102,7 +102,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-12">
             <h3>Kontrakty do któych należy użytkownik</h3>
 
-            <?php if ($model->categories): ?>
+            <?php if ($model->contracts): ?>
                 <table class="table table-striped table-hover">
 
                     <thead>
@@ -120,7 +120,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <td><?= $key + 1 ?></td>
                             <td> <?= Html::a($contract->contract->airline_name, ['contract/view', 'id' => $contract->contract_id]) ?> </td>
                             <td>
-                                <?= Html::a('Usuń użytkownika z tej kategorii', ['user/delete-link-category',
+                                <?= Html::a('Usuń użytkownika z tego kontraktu', ['user/delete-link-contract',
                                     'user_id' => $contract->user_id,
                                     'contract_id' => $contract->contract_id
                                 ],

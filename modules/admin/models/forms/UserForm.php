@@ -48,7 +48,9 @@ class UserForm extends User
             [['name', 'lastname', 'password', 'email'], 'string'],
             [['email', 'name', 'lastname'], 'required'],
             [['password'], 'required', 'on' => static::SCENARIO_CREATE],
-            [['categories_list', 'contract_list'], 'required'],
+            //[['categories_list', 'contract_list'], 'required'],
+            ['categories_list', 'each', 'rule' => ['integer']],
+            ['contract_list', 'each', 'rule' => ['integer']],
             ['email', 'email'],
             ['email', 'unique'],
             [['message'], 'integer'],
@@ -90,27 +92,29 @@ class UserForm extends User
     {
         parent::afterSave($insert, $changedAttributes);
 
-
         UserCategory::deleteAllCategories($this->id);
+        if (!empty($this->categories_list)) {
 
-        foreach ($this->categories_list as $category) {
+            foreach ($this->categories_list as $category) {
 
-            $link = new UserCategory();
-            $link->category_id = $category;
-            $link->user_id = $this->id;
-            $link->save();
-
+                $link = new UserCategory();
+                $link->category_id = $category;
+                $link->user_id = $this->id;
+                $link->save();
+            }
         }
 
         UserContract::deleteAllContracts($this->id);
+        if (!empty($this->contract_list)) {
 
-        foreach ($this->contract_list as $contract) {
+            foreach ($this->contract_list as $contract) {
 
-            $link = new UserContract();
-            $link->contract_id = $contract;
-            $link->user_id = $this->id;
-            $link->save();
-
+                $link = new UserContract();
+                $link->contract_id = $contract;
+                $link->user_id = $this->id;
+                $link->save();
+            }
         }
+
     }
 }

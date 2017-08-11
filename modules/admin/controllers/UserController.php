@@ -176,6 +176,17 @@ class UserController extends Controller
         return $this->redirect(Yii::$app->request->referrer);
     }
 
+    public function actionDeleteLinkContract($user_id, $contract_id)
+    {
+        $link = UserContract::find()
+            ->where(['user_id' => $user_id, 'contract_id' => $contract_id])
+            ->one();
+
+        $link->delete();
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
     public function actionUserListJson($phrase, $page = 1)
     {
         $limit = 20;
