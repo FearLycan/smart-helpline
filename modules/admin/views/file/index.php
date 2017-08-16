@@ -21,6 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'options' => ['class' => 'grid-view table-responsive'],
         'columns' => Helpers::getColumnsFileGride(),
     ]); ?>
     <?php Pjax::end(); ?>

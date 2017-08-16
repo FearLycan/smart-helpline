@@ -82,43 +82,45 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php if (empty($files)): ?>
                 <p>Brak plików.</p>
             <?php else: ?>
-                <table class="table table-striped table-bordered">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nazwa</th>
-                        <th>Autor</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach ($files as $key => $file): ?>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead>
                         <tr>
-                            <td width="30"><?= $key + 1 ?></td>
-                            <td><?= Html::a($file->name, ['file/download', 'id' => $file->id], ['data-pjax' => '0']); ?></td>
-                            <td width="250"><?= $file->author->name . ' ' . $file->author->lastname ?></td>
-                            <td width="170" class="text-center">
-                                <?= Html::a('Pobierz', ['file/download', 'id' => $file->id], [
-                                    'class' => 'btn btn-success btn-xs',
-                                    'data-pjax' => '0',
-                                ]); ?>
-
-                                <?= Html::a('Edytuj', ['file/update', 'id' => $file->id], [
-                                    'class' => 'btn btn-primary btn-xs',
-                                    'data-pjax' => '0',
-                                ]); ?>
-
-                                <?= Html::a('Usuń', ['file/delete', 'id' => $file->id], [
-                                    'class' => 'btn btn-danger btn-xs',
-                                    'data-pjax' => '0',
-                                    'data-confirm' => 'Czy na pewno usunąć ten element?',
-                                    'data-method' => 'post',
-                                ]); ?>
-                            </td>
+                            <th>#</th>
+                            <th>Nazwa</th>
+                            <th>Autor</th>
+                            <th></th>
                         </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($files as $key => $file): ?>
+                            <tr>
+                                <td width="30"><?= $key + 1 ?></td>
+                                <td><?= Html::a($file->name, ['file/download', 'id' => $file->id], ['data-pjax' => '0']); ?></td>
+                                <td width="250"><?= $file->author->name . ' ' . $file->author->lastname ?></td>
+                                <td width="170" class="text-center">
+                                    <?= Html::a('Pobierz', ['file/download', 'id' => $file->id], [
+                                        'class' => 'btn btn-success btn-xs',
+                                        'data-pjax' => '0',
+                                    ]); ?>
+
+                                    <?= Html::a('Edytuj', ['file/update', 'id' => $file->id], [
+                                        'class' => 'btn btn-primary btn-xs',
+                                        'data-pjax' => '0',
+                                    ]); ?>
+
+                                    <?= Html::a('Usuń', ['file/delete', 'id' => $file->id], [
+                                        'class' => 'btn btn-danger btn-xs',
+                                        'data-pjax' => '0',
+                                        'data-confirm' => 'Czy na pewno usunąć ten element?',
+                                        'data-method' => 'post',
+                                    ]); ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             <?php endif; ?>
         </div>
     </div>

@@ -61,37 +61,39 @@ $this->params['breadcrumbs'][] = $this->title;
             <h3>Kategorie do któych należy użytkownik</h3>
 
             <?php if ($model->categories): ?>
-                <table class="table table-striped table-hover">
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
 
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th width="400">Kategoria</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-                    <?php foreach ($model->categories as $key => $category): ?>
+                        <thead>
                         <tr>
-                            <td><?= $key + 1 ?></td>
-                            <td> <?= Html::a($category->category->name, ['category/view', 'id' => $category->category_id]) ?> </td>
-                            <td>
-                                <?= Html::a('Usuń użytkownika z tej kategorii', ['user/delete-link-category',
-                                    'user_id' => $category->user_id,
-                                    'category_id' => $category->category_id
-                                ],
-                                    [
-                                        'class' => 'btn btn-danger btn-xs',
-                                        'data-confirm' => 'Czy na pewno usunąć ten element?',
-                                        'data-method' => 'post'
-                                    ]
-                                ) ?>
-                            </td>
+                            <th>#</th>
+                            <th width="400">Kategoria</th>
+                            <th></th>
                         </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+
+                        <tbody>
+                        <?php foreach ($model->categories as $key => $category): ?>
+                            <tr>
+                                <td><?= $key + 1 ?></td>
+                                <td> <?= Html::a($category->category->name, ['category/view', 'id' => $category->category_id]) ?> </td>
+                                <td>
+                                    <?= Html::a('Usuń użytkownika z tej kategorii', ['user/delete-link-category',
+                                        'user_id' => $category->user_id,
+                                        'category_id' => $category->category_id
+                                    ],
+                                        [
+                                            'class' => 'btn btn-danger btn-xs',
+                                            'data-confirm' => 'Czy na pewno usunąć ten element?',
+                                            'data-method' => 'post'
+                                        ]
+                                    ) ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             <?php else: ?>
                 <p>Brak przypisanych kategorii</p>
             <?php endif; ?>
@@ -103,38 +105,40 @@ $this->params['breadcrumbs'][] = $this->title;
             <h3>Kontrakty do któych należy użytkownik</h3>
 
             <?php if ($model->contracts): ?>
-                <table class="table table-striped table-hover">
+               <div class="table-responsive">
+                   <table class="table table-striped table-hover">
 
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th width="400">Kontrakty</th>
-                        <th></th>
-                    </tr>
-                    </thead>
+                       <thead>
+                       <tr>
+                           <th>#</th>
+                           <th width="400">Kontrakty</th>
+                           <th></th>
+                       </tr>
+                       </thead>
 
-                    <tbody>
-                    <?php foreach ($model->contracts as $key => $contract): ?>
-                        <?php /* @var $contract \app\modules\admin\models\Contract */ ?>
-                        <tr>
-                            <td><?= $key + 1 ?></td>
-                            <td> <?= Html::a($contract->contract->airline_name, ['contract/view', 'id' => $contract->contract_id]) ?> </td>
-                            <td>
-                                <?= Html::a('Usuń użytkownika z tego kontraktu', ['user/delete-link-contract',
-                                    'user_id' => $contract->user_id,
-                                    'contract_id' => $contract->contract_id
-                                ],
-                                    [
-                                        'class' => 'btn btn-danger btn-xs',
-                                        'data-confirm' => 'Czy na pewno usunąć ten element?',
-                                        'data-method' => 'post'
-                                    ]
-                                ) ?>
-                            </td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
+                       <tbody>
+                       <?php foreach ($model->contracts as $key => $contract): ?>
+                           <?php /* @var $contract \app\modules\admin\models\Contract */ ?>
+                           <tr>
+                               <td><?= $key + 1 ?></td>
+                               <td> <?= Html::a($contract->contract->airline_name, ['contract/view', 'id' => $contract->contract_id]) ?> </td>
+                               <td>
+                                   <?= Html::a('Usuń użytkownika z tego kontraktu', ['user/delete-link-contract',
+                                       'user_id' => $contract->user_id,
+                                       'contract_id' => $contract->contract_id
+                                   ],
+                                       [
+                                           'class' => 'btn btn-danger btn-xs',
+                                           'data-confirm' => 'Czy na pewno usunąć ten element?',
+                                           'data-method' => 'post'
+                                       ]
+                                   ) ?>
+                               </td>
+                           </tr>
+                       <?php endforeach; ?>
+                       </tbody>
+                   </table>
+               </div>
             <?php else: ?>
                 <p>Brak przypisanych kontraktów</p>
             <?php endif; ?>
