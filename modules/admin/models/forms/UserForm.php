@@ -63,20 +63,20 @@ class UserForm extends User
     public function attributeLabels()
     {
         return [
-            'name' => 'Imię',
-            'lastname' => 'Nazwisko',
-            'email' => 'Adres e-mail',
-            'password' => 'Hasło',
-            'message' => 'Wyślij dane do logowania użytkownikowi',
-            'categories_list' => 'Wybierz kategorie dla tego użytkownika',
-            'contract_list' => 'Wybierz kontrakty dla tego użytkownika',
+            'name' => 'Name',
+            'lastname' => 'Last name',
+            'email' => 'E-mail',
+            'password' => 'Password',
+            'message' => 'Send user his login details',
+            'categories_list' => 'Choose category for this user',
+            'contract_list' => 'Choose contracts for this user',
         ];
     }
 
     public function canSendNotyfication($attribute)
     {
         if ($this->password == null && $this->message == static::SEND_MESSAGE) {
-            $this->addError($attribute, 'Aby, wysłać dane do logowania musisz wpisać nowe hasło.');
+            $this->addError($attribute, 'You have to input new password for sending login details.'); 
         }
     }
 

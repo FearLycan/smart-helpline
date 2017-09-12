@@ -35,20 +35,20 @@ class Helpers
             ],
             [
                 'attribute' => 'category',
-                'label' => 'Kategoria',
+                'label' => 'Category',
                 'format' => 'raw',
                 'value' => function ($data) {
                     /* @var $data File */
                     if ($data->category_id != 0) {
                         return Html::a($data->category->name, ['category/view', 'id' => $data->category_id]);
                     } else {
-                        return Html::a('Kontrakt', ['contract/view', 'id' => $data->contract_id]);
+                        return Html::a('Contract', ['contract/view', 'id' => $data->contract_id]);
                     }
                 },
             ],
             [
                 'attribute' => 'author',
-                'label' => 'Autor',
+                'label' => 'Author',
                 'format' => 'raw',
                 'value' => function ($data) {
                     /* @var $data File */
@@ -60,7 +60,7 @@ class Helpers
                 'format' => 'raw',
                 'value' => function ($data) {
                     /* @var $data File */
-                    return Html::a('Edytuj', ['file/update', 'id' => $data->id], [
+                    return Html::a('Edit', ['file/update', 'id' => $data->id], [
                         'class' => 'btn btn-primary btn-xs',
                         'data-pjax' => '0',
                     ]);
@@ -70,7 +70,7 @@ class Helpers
                 'format' => 'raw',
                 'value' => function ($data) {
                     /* @var $data File */
-                    return Html::a('Pobierz', ['file/download', 'id' => $data->id], [
+                    return Html::a('Download', ['file/download', 'id' => $data->id], [
                         'class' => 'btn btn-success btn-xs',
                         'data-pjax' => '0',
                     ]);
@@ -80,10 +80,10 @@ class Helpers
                 'format' => 'raw',
                 'value' => function ($data) {
                     /* @var $data File */
-                    return Html::a('Usuń', ['file/delete', 'id' => $data->id], [
+                    return Html::a('Delete', ['file/delete', 'id' => $data->id], [
                         'class' => 'btn btn-danger btn-xs',
                         'data-pjax' => '0',
-                        'data-confirm' => 'Czy na pewno usunąć ten element?',
+                        'data-confirm' => 'Are you sure you want to delete this item?',
                         'data-method' => 'post',
                     ]);
                 },
@@ -100,7 +100,7 @@ class Helpers
                 'name',
                 [
                     'attribute' => 'author',
-                    'label' => 'Autor',
+                    'label' => 'Author',
                     'value' => function ($data) {
                         /* @var $data Category */
                         return $data->author->lastname . ' ' . $data->author->name;

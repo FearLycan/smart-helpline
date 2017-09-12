@@ -28,8 +28,8 @@ class LoginForm extends User
     public function attributeLabels()
     {
         return [
-            'email' => 'Adres e-mail',
-            'password' => 'Hasło',
+            'email' => 'E-mail',
+            'password' => 'Password',
         ];
     }
 

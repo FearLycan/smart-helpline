@@ -8,7 +8,7 @@ use yii\widgets\DetailView;
 /* @var $file app\modules\admin\models\File */
 
 $this->title = $model->airline_name;
-$this->params['breadcrumbs'][] = ['label' => 'Kontrakty', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Contracts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="contract-view">
@@ -16,8 +16,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Edytuj', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Usuń', ['delete', 'id' => $model->id], [
+        <?= Html::a('Edit', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -77,18 +77,18 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <div class="col-md-12">
-            <h3>Pliki</h3>
+            <h3>Files</h3>
 
             <?php if (empty($files)): ?>
-                <p>Brak plików.</p>
+                <p>No files.</p>
             <?php else: ?>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered">
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Nazwa</th>
-                            <th>Autor</th>
+                            <th>Name</th>
+                            <th>Author</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -99,20 +99,20 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <td><?= Html::a($file->name, ['file/download', 'id' => $file->id], ['data-pjax' => '0']); ?></td>
                                 <td width="250"><?= $file->author->name . ' ' . $file->author->lastname ?></td>
                                 <td width="170" class="text-center">
-                                    <?= Html::a('Pobierz', ['file/download', 'id' => $file->id], [
+                                    <?= Html::a('Download', ['file/download', 'id' => $file->id], [
                                         'class' => 'btn btn-success btn-xs',
                                         'data-pjax' => '0',
                                     ]); ?>
 
-                                    <?= Html::a('Edytuj', ['file/update', 'id' => $file->id], [
+                                    <?= Html::a('Edit', ['file/update', 'id' => $file->id], [
                                         'class' => 'btn btn-primary btn-xs',
                                         'data-pjax' => '0',
                                     ]); ?>
 
-                                    <?= Html::a('Usuń', ['file/delete', 'id' => $file->id], [
+                                    <?= Html::a('Delete', ['file/delete', 'id' => $file->id], [
                                         'class' => 'btn btn-danger btn-xs',
                                         'data-pjax' => '0',
-                                        'data-confirm' => 'Czy na pewno usunąć ten element?',
+                                        'data-confirm' => 'Are you sure you want to delete this item?',
                                         'data-method' => 'post',
                                     ]); ?>
                                 </td>

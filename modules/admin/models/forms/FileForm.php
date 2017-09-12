@@ -35,7 +35,7 @@ class FileForm extends File
     public function attributeLabels()
     {
         return array_merge(parent::attributeLabels(), [
-            'files' => 'Wybierz pliki do przesłania',
+            'files' => 'Choose files for upload',
         ]);
     }
 

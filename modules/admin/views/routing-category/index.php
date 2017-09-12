@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\admin\models\RoutingCategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Kategorie Routingu';
+$this->title = 'Routing categories';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="routing-category-index">
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Dodaj kategorię routingu', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add routing category', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

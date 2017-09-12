@@ -48,8 +48,8 @@ use yii\widgets\ActiveForm;
             </div>
 
             <div class="col-md-4 text-right">
-                <label>Losowe hasło</label>
-                <a href="javascript:void(0);" id="random" class="btn btn-primary">Wylosuj</a>
+                <label>Random password</label>
+                <a href="javascript:void(0);" id="random" class="btn btn-primary">Generate</a>
             </div>
         </div>
     </div>
@@ -87,7 +87,7 @@ use yii\widgets\ActiveForm;
 
         <div class="col-md-12">
             <div class="form-group">
-                <?= Html::submitButton('Zapisz', ['class' => 'btn btn-success']) ?>
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
             </div>
         </div>
     </div>

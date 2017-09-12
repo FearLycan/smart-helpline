@@ -2,10 +2,8 @@
 
 namespace app\modules\admin\components;
 
-
 use yii\base\Behavior;
 use yii\db\ActiveRecord;
-
 
 /*
  *  @author Damian Brończyk <damian.bronczyk@gmail.com.pl>

@@ -35,24 +35,18 @@ AppAsset::register($this);
         ],
     ]);
 
-    $menuItems[] = ['label' => 'Użytkownicy', 'url' => ['user/index']];
-    $menuItems[] = ['label' => 'Kategorie', 'url' => ['category/index']];
-    $menuItems[] = ['label' => 'Pliki', 'url' => ['file/index']];
-    $menuItems[] = ['label' => 'Kontrakty', 'url' => ['contract/index']];
-//    $menuItems[] = ['label' => 'Kontrakty',
-//        'items' => [
-//            ['label' => 'Lista kontraktów', 'url' => ['contract/index']],
-//            ['label' => 'Kategorie kontraktów', 'url' => ['routing-category/index']],
-//        ]
-//    ];
+    $menuItems[] = ['label' => 'Users', 'url' => ['user/index']];
+    $menuItems[] = ['label' => 'Categories', 'url' => ['category/index']];
+    $menuItems[] = ['label' => 'Files', 'url' => ['file/index']];
+    $menuItems[] = ['label' => 'Contracts', 'url' => ['contract/index']];
 
     if (!Yii::$app->user->isGuest) {
         $menuItems[] = [
             'label' => Yii::$app->user->identity->name . ' ' . Yii::$app->user->identity->lastname,
             'options' => ['class' => 'hover'],
             'items' => [
-                ['label' => 'Strona główna', 'url' => ['/site/index']],
-                ['label' => 'Panel Admina', 'url' => ['/admin/user/index']],
+                ['label' => 'Home Page', 'url' => ['/site/index']],
+                ['label' => 'Admin panel', 'url' => ['/admin/user/index']],
                 '<li class="divider"></li>',
                 ['label' => 'Logout',
                     'url' => ['/site/logout'],

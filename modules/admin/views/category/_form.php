@@ -23,7 +23,7 @@ use dosamigos\tinymce\TinyMce;
 
     <?= $form->field($model, 'description')->widget(TinyMce::className(), [
         'options' => ['rows' => 6],
-        'language' => 'pl',
+        'language' => 'en',
         'clientOptions' => [
             //'menubar' => false,
             'plugins' => [
@@ -42,7 +42,7 @@ use dosamigos\tinymce\TinyMce;
     ]); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Zapisz', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

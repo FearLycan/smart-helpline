@@ -55,10 +55,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <div class="col-md-12">
-            <h3>Pliki</h3>
+            <h3>Files</h3>
 
             <?php if (empty($files)): ?>
-                <p>Brak plików.</p>
+                <p>No files.</p>
             <?php else: ?>
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered">
@@ -77,7 +77,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <td><?= Html::a($file->name, ['site/download', 'id' => $file->id], ['data-pjax' => '0']); ?></td>
                                 <td width="250"><?= $file->author->name . ' ' . $file->author->lastname ?></td>
                                 <td width="70" class="text-center">
-                                    <?= Html::a('Pobierz', ['site/download', 'id' => $file->id], [
+                                    <?= Html::a('Download', ['site/download', 'id' => $file->id], [
                                         'class' => 'btn btn-success btn-xs',
                                         'data-pjax' => '0',
                                     ]); ?>

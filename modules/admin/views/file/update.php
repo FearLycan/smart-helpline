@@ -7,8 +7,8 @@ use yii\helpers\Html;
 /* @var $model app\modules\admin\models\File */
 /* @var $category app\modules\admin\models\Category */
 
-$this->title = 'Edycja pliku ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Pliki', 'url' => ['index']];
+$this->title = 'File edit ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => 'Files', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="file-create">

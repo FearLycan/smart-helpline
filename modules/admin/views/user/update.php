@@ -6,9 +6,9 @@ use yii\helpers\Html;
 /* @var $model app\modules\admin\models\User */
 
 $this->title = 'Edycja: ' . $model->name . ' ' . $model->lastname;
-$this->params['breadcrumbs'][] = ['label' => 'Użytkownicy', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name . ' ' . $model->lastname, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Edytuj';
+$this->params['breadcrumbs'][] = 'Edit';
 ?>
 <div class="user-update">
 

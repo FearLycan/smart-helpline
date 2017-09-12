@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\admin\models\FileSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Pliki';
+$this->title = 'Files';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="file-index">

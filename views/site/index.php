@@ -13,7 +13,7 @@ $this->title = 'Smart Helpline';
 ?>
 <div class="site-index">
 
-    <h1>Kategorie, do których należysz:</h1>
+    <h1>Categories you are added to:</h1>
 
     <?php Pjax::begin(); ?>
 
@@ -42,7 +42,7 @@ $this->title = 'Smart Helpline';
             ],
             [
                 'attribute' => 'author',
-                'label' => 'Autor',
+                'label' => 'Author',
                 'value' => function ($data) {
                     /* @var $data Category */
                     return $data->author->lastname . ' ' . $data->author->name;

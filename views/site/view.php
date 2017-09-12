@@ -17,13 +17,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <h1><?= $this->title ?></h1>
 
 <p><?= $category->description ?></p>
-<p><strong>Autor: </strong><?= Html::encode($category->author->name . ' ' . $category->author->lastname) ?></p>
-<p><strong>Data publikacji: </strong><?= Html::encode($category->created_at) ?></p>
-<p><strong>Ostatnia aktualizacja: </strong><?= Html::encode($category->updated_at) ?></p>
+<p><strong>Author: </strong><?= Html::encode($category->author->name . ' ' . $category->author->lastname) ?></p>
+<p><strong>Created at: </strong><?= Html::encode($category->created_at) ?></p>
+<p><strong>Updated at: </strong><?= Html::encode($category->updated_at) ?></p>
 
 <hr>
 
-<h3>Lista plików</h3>
+<h3>Files list</h3>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         [
             'attribute' => 'author',
-            'label' => 'Autor',
+            'label' => 'Author',
             'value' => function ($data) {
                 /* @var $data File */
                 return $data->author->lastname . ' ' . $data->author->name;

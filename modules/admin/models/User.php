@@ -36,7 +36,7 @@ class User extends \app\models\User
             ])
             ->setFrom([Yii::$app->params['site-email'] => Yii::$app->name])
             ->setTo([$this->email => $this->name . ' ' . $this->last_seen])
-            ->setSubject('Twoje konto zostało założone')
+            ->setSubject('Your account has been created')
             ->send();
     }
 }

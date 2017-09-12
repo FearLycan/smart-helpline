@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "{{%routing_category}}".
  *
@@ -48,11 +46,11 @@ class RoutingCategory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Nazwa',
-            'description' => 'Opis',
+            'name' => 'Name',
+            'description' => 'Description',
             'author_id' => 'Author ID',
-            'created_at' => 'Data utworzenia',
-            'updated_at' => 'Data aktualizacji',
+            'created_at' => 'Created at',
+            'updated_at' => 'Updated at',
         ];
     }
 

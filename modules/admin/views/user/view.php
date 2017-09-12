@@ -10,7 +10,7 @@ use yii\widgets\DetailView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = $model->name . ' ' . $model->lastname;
-$this->params['breadcrumbs'][] = ['label' => 'Użytkownicy', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-view">
@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'lastname',
             'email:email',
             [
-                'label' => 'Rola',
+                'label' => 'Role',
                 'value' => function ($data) {
                     /* @var $data User */
                     return $data->getRoleName();
@@ -58,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <div class="row">
         <div class="col-md-12">
-            <h3>Kategorie do któych należy użytkownik</h3>
+            <h3>Categories assigned</h3>
 
             <?php if ($model->categories): ?>
                 <div class="table-responsive">
@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th width="400">Kategoria</th>
+                            <th width="400">Category</th>
                             <th></th>
                         </tr>
                         </thead>
@@ -78,13 +78,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <td><?= $key + 1 ?></td>
                                 <td> <?= Html::a($category->category->name, ['category/view', 'id' => $category->category_id]) ?> </td>
                                 <td>
-                                    <?= Html::a('Usuń użytkownika z tej kategorii', ['user/delete-link-category',
+                                    <?= Html::a('Remove user form this category', ['user/delete-link-category',
                                         'user_id' => $category->user_id,
                                         'category_id' => $category->category_id
                                     ],
                                         [
                                             'class' => 'btn btn-danger btn-xs',
-                                            'data-confirm' => 'Czy na pewno usunąć ten element?',
+                                            'data-confirm' => 'Are you sure want to delete this element?',
                                             'data-method' => 'post'
                                         ]
                                     ) ?>
@@ -95,14 +95,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     </table>
                 </div>
             <?php else: ?>
-                <p>Brak przypisanych kategorii</p>
+                <p>No categories assigned</p>
             <?php endif; ?>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-12">
-            <h3>Kontrakty do któych należy użytkownik</h3>
+            <h3>Contracts assigned</h3>
 
             <?php if ($model->contracts): ?>
                <div class="table-responsive">
@@ -111,7 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
                        <thead>
                        <tr>
                            <th>#</th>
-                           <th width="400">Kontrakty</th>
+                           <th width="400">Contracts</th>
                            <th></th>
                        </tr>
                        </thead>
@@ -123,13 +123,13 @@ $this->params['breadcrumbs'][] = $this->title;
                                <td><?= $key + 1 ?></td>
                                <td> <?= Html::a($contract->contract->airline_name, ['contract/view', 'id' => $contract->contract_id]) ?> </td>
                                <td>
-                                   <?= Html::a('Usuń użytkownika z tego kontraktu', ['user/delete-link-contract',
+                                   <?= Html::a('Remove user form this contract', ['user/delete-link-contract',
                                        'user_id' => $contract->user_id,
                                        'contract_id' => $contract->contract_id
                                    ],
                                        [
                                            'class' => 'btn btn-danger btn-xs',
-                                           'data-confirm' => 'Czy na pewno usunąć ten element?',
+                                           'data-confirm' => 'Are you sure want to delete this element?',
                                            'data-method' => 'post'
                                        ]
                                    ) ?>
@@ -140,7 +140,7 @@ $this->params['breadcrumbs'][] = $this->title;
                    </table>
                </div>
             <?php else: ?>
-                <p>Brak przypisanych kontraktów</p>
+                <p>No contracts assigned</p>
             <?php endif; ?>
         </div>
     </div>

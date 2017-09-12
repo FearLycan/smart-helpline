@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\admin\models\ContractSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Kontrakty';
+$this->title = 'Contracts';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="contract-index">
@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Dodaj kontrakt', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add contract', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -88,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'codeshares',
             [
                 'attribute' => 'author',
-                'label' => 'Autor',
+                'label' => 'Author',
                 'format' => 'raw',
                 'value' => function ($data) {
                     /* @var $data Contract */

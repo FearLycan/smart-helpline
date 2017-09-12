@@ -41,7 +41,7 @@ AppAsset::register($this);
     if (!Yii::$app->user->isGuest) {
 
         if (Yii::$app->user->identity->isAdministrator()) {
-            $item = ['label' => 'Panel admina', 'url' => ['admin/user']];
+            $item = ['label' => 'Admin panel', 'url' => ['admin/user']];
         } else {
             $item = ['label' => '', 'url' => '#'];
         }
@@ -53,7 +53,7 @@ AppAsset::register($this);
             'label' => Yii::$app->user->identity->name . ' ' . Yii::$app->user->identity->lastname,
             'options' => ['class' => 'hover'],
             'items' => [
-                ['label' => 'Strona główna', 'url' => ['/site/index']],
+                ['label' => 'Home page', 'url' => ['/site/index']],
                 $item,
                 '<li class="divider"></li>',
                 ['label' => 'Logout', 'url' => ['/site/logout'],

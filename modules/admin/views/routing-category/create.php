@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\RoutingCategory */
 
-$this->title = 'Dodaj kategorię routingu';
-$this->params['breadcrumbs'][] = ['label' => 'Kategorie Routingu', 'url' => ['index']];
+$this->title = 'Add routing category';
+$this->params['breadcrumbs'][] = ['label' => 'Routing categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="routing-category-create">

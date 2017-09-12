@@ -68,16 +68,16 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             'id' => 'ID',
-            'name' => 'Imię',
-            'lastname' => 'Nazwisko',
+            'name' => 'Name',
+            'lastname' => 'Last name',
             'email' => 'Email',
-            'password' => 'Hasło',
-            'role' => 'Rola',
+            'password' => 'Password',
+            'role' => 'Role',
             'status' => 'Status',
-            'registered_at' => 'Data rejestracji',
-            'last_login_at' => 'Ostatnie logowanie',
+            'registered_at' => 'Registered at',
+            'last_login_at' => 'Last login at',
             'auth_key' => 'Auth Key',
-            'last_seen' => 'Ostatnia aktywność',
+            'last_seen' => 'Last seen',
             'verification_code' => 'Verification Code',
         ];
     }
@@ -88,8 +88,8 @@ class User extends ActiveRecord implements IdentityInterface
     public static function getStatusNames()
     {
         return [
-            static::STATUS_ACTIVE => 'Aktywny',
-            static::STATUS_INACTIVE => 'Nieaktywny',
+            static::STATUS_ACTIVE => 'Active',
+            static::STATUS_INACTIVE => 'Non active',
             static::STATUS_BAN => 'BAN',
         ];
     }
@@ -108,8 +108,8 @@ class User extends ActiveRecord implements IdentityInterface
     public static function getRolesNames()
     {
         return [
-            static::ROLE_USER => 'Użytkownik',
-            static::ROLE_ADMIN => 'Administrator',
+            static::ROLE_USER => 'User',
+            static::ROLE_ADMIN => 'Admin',
         ];
     }
 

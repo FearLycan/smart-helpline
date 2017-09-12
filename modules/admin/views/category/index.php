@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\admin\models\CategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Kategorie';
+$this->title = 'Categories';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="category-index">
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Dodaj kategorię', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add category', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'author',
-                'label' => 'Autor',
+                'label' => 'Author',
                 'format' => 'raw',
                 'value' => function ($data) {
                     /* @var $data Category */

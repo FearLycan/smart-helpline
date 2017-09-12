@@ -54,14 +54,14 @@ class File extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Nazwa',
+            'name' => 'Name',
             'real_name' => 'Real Name',
             'format' => 'Format',
             'category_id' => 'Category ID',
             'author_id' => 'Author ID',
-            'created_at' => 'Data utworzenia',
-            'updated_at' => 'Ostatnia aktualizacja',
-            'description' => 'Opis pliku',
+            'created_at' => 'Created at',
+            'updated_at' => 'Updated at',
+            'description' => 'File description',
         ];
     }
 

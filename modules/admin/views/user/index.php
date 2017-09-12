@@ -9,7 +9,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\modules\admin\models\UserSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Użytkownicy';
+$this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Dodaj użytkownika', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Add user', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -29,12 +29,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn', 'contentOptions' => ['style' => 'width: 40px;']],
             [
-                'label' => 'Nazwisko',
+                'label' => 'Last Name',
                 'attribute' => 'lastname',
                 'contentOptions' => ['style' => 'width: 150px;'],
             ],
             [
-                'label' => 'Imię',
+                'label' => 'Name',
                 'attribute' => 'name',
                 'contentOptions' => ['style' => 'width: 150px;'],
             ],
@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style' => 'width: 150px;'],
             ],
             [
-                'label' => 'Rola',
+                'label' => 'Role',
                 'attribute' => 'role',
                 'filter' => User::getRolesNames(),
                 'value' => function ($data) {
@@ -64,12 +64,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => ['style' => 'width: 100px;'],
             ],
             [
-                'label' => 'Data rejestracji',
+                'label' => 'Registered at',
                 'attribute' => 'registered_at',
                 'contentOptions' => ['style' => 'width: 160px;'],
             ],
             [
-                'label' => 'Ostatnia aktywność',
+                'label' => 'Last seen',
                 'attribute' => 'last_seen',
                 'contentOptions' => ['style' => 'width: 160px;'],
             ],

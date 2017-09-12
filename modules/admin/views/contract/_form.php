@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
     <div class="row">
         <div class="col-md-4">
             <?= $form->field($model, 'contract_validity_from')->widget(DatePicker::classname(), [
-                'options' => ['placeholder' => 'Wybierz date'],
+                'options' => ['placeholder' => 'Choose date'],
                 'type' => DatePicker::TYPE_INPUT,
                 'pluginOptions' => [
                     'autoclose' => true,
@@ -33,7 +33,7 @@ use yii\widgets\ActiveForm;
 
         <div class="col-md-4">
             <?= $form->field($model, 'contract_validity_to')->widget(DatePicker::classname(), [
-                'options' => ['placeholder' => 'Wybierz date'],
+                'options' => ['placeholder' => 'Choose date'],
                 'type' => DatePicker::TYPE_INPUT,
                 'pluginOptions' => [
                     'autoclose' => true,
@@ -116,7 +116,7 @@ use yii\widgets\ActiveForm;
     ]); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Zapisz', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
