@@ -35,11 +35,11 @@ $config = [
             'useFileTransport' => false,
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
-                'host' => 'secure.emailsrvr.com',
-                'username' => 'system@smart-helpline.com',
-                'password' => 'sw5uKiuq',
-                'port' => '465',
-                'encryption' => 'ssl',
+                'host' => '#',
+                'username' => '#',
+                'password' => '#',
+                'port' => '#',
+                'encryption' => '#',
             ],
         ],
         'log' => [
