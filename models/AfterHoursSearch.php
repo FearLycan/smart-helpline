@@ -5,17 +5,15 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\models\AfterHours;
 
 /**
- * CategorySearch represents the model behind the search form of `app\modules\admin\models\Category`.
+ * AfterHoursSearch represents the model behind the search form of `app\models\AfterHours`.
  */
-class CategorySearch extends Category
+class AfterHoursSearch extends AfterHours
 {
-
     public $name;
-    public $description;
     public $created_at;
-    public $updated_at;
     public $author;
 
     /**
@@ -24,7 +22,7 @@ class CategorySearch extends Category
     public function rules()
     {
         return [
-            [['name', 'description', 'created_at', 'author', 'updated_at'], 'string'],
+            [['name', 'created_at', 'author'], 'safe'],
         ];
     }
 
@@ -46,13 +44,10 @@ class CategorySearch extends Category
      */
     public function search($params, $query)
     {
-        $query->joinWith(['author author']);
-
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder' => ['name' => SORT_ASC]],
         ]);
 
         $dataProvider->sort->attributes['author'] = [
@@ -68,10 +63,12 @@ class CategorySearch extends Category
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'category.name', $this->name])
-            ->andFilterWhere(['like', 'category.description', $this->description])
-            ->andFilterWhere(['like', 'category.created_at', $this->created_at])
-            ->andFilterWhere(['like', 'category.updated_at', $this->updated_at])
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'created_at' => $this->created_at,
+        ]);
+
+        $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere([
                 'or',
                 ['like', 'author.name', $this->author],

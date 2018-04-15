@@ -28,12 +28,16 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'options' => ['class' => 'grid-view table-responsive'],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'class' => 'yii\grid\SerialColumn',
+                'contentOptions' => ['style' => 'width: 45px;'],
+            ],
 
             // 'airline_name',
             [
                 'attribute' => 'airline_name',
                 'format' => 'raw',
+                'contentOptions' => ['style' => 'width: 160px;'],
                 'value' => function ($data) {
                     /* @var $data Contract */
                     return Html::a($data->airline_name, ['view', 'id' => $data->id]);
@@ -70,29 +74,14 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]) . '</div>',
                 'format' => ['date', 'php:Y-m-d']
             ],
-            //'routing',
-            [
-                'attribute' => 'infant_fares',
-                'format' => 'raw',
-                'value' => function ($data) {
-                    /* @var $data Contract */
-                    return $data->infant_fares;
-                },
-            ],
-            //'infant_fares',
-            // 'ticket_designator',
-            //'tour_code',
-            // 'endorsment',
-            // 'mixed_classes',
-            // 'interline',
-            // 'codeshares',
             [
                 'attribute' => 'author',
                 'label' => 'Author',
                 'format' => 'raw',
+                'contentOptions' => ['style' => 'width: 170px;'],
                 'value' => function ($data) {
                     /* @var $data Contract */
-                    return Html::a($data->author->lastname . ' ' . $data->author->name, ['user/view', 'id' => $data->author->id]);
+                    return Html::a($data->author->name . ' ' . $data->author->lastname, ['user/view', 'id' => $data->author->id]);
                 },
 
             ],
@@ -109,10 +98,10 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]
                     ]) . '</div>',
             ],
-
-            // 'updated_at',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'contentOptions' => ['style' => 'width: 70px;'],
+            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>

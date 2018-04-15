@@ -6,9 +6,13 @@ use app\modules\admin\components\Controller;
 use app\modules\admin\models\File;
 use app\modules\admin\models\FileSearch;
 use app\modules\admin\models\forms\CategoryForm;
+use app\modules\admin\models\forms\QuickUserForm;
+use app\modules\admin\models\User;
+use app\modules\admin\models\UserCategory;
 use Yii;
 use app\modules\admin\models\Category;
 use app\modules\admin\models\CategorySearch;
+use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\Response;
@@ -61,10 +65,34 @@ class CategoryController extends Controller
         $query = File::find()->where(['category_id' => $id]);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
 
+        $users = ArrayHelper::map(User::find()->select(['id', new \yii\db\Expression("CONCAT(`name`, ' ', `lastname`) as name")])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+
+        $quickUserForm = new QuickUserForm();
+
+        $us = UserCategory::find()->where(['category_id' => $id])->all();
+
+        $tab = [];
+        foreach ($us as $u) {
+            array_push($tab, $u->user->id);
+        }
+
+        $quickUserForm->users = $tab;
+
+        if ($quickUserForm->load(Yii::$app->request->post())) {
+
+            if ($quickUserForm->users != $tab) {
+                UserCategory::makeConnection($quickUserForm->users, $id);
+            }
+
+            return $this->redirect(['category/view', 'id' => $id]);
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
+            'quickUserForm' => $quickUserForm,
+            'users' => $users,
         ]);
     }
 

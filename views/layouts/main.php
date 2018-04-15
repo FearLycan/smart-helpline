@@ -48,6 +48,7 @@ AppAsset::register($this);
 
         $menuItems[] = ['label' => 'Categories', 'url' => ['site/index']];
         $menuItems[] = ['label' => 'Contracts', 'url' => ['contract/index']];
+        $menuItems[] = ['label' => 'After Hours', 'url' => ['after-hours/index']];
 
         $menuItems[] = [
             'label' => Yii::$app->user->identity->name . ' ' . Yii::$app->user->identity->lastname,

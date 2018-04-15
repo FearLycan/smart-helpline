@@ -24,7 +24,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'options' => ['class' => 'grid-view table-responsive'],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'class' => 'yii\grid\SerialColumn',
+                'contentOptions' => ['style' => 'width:40px;'],
+            ],
 
             [
                 'attribute' => 'airline_name',
@@ -33,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     /* @var $data Contract */
                     return Html::a($data->airline_name, ['contract/view', 'id' => $data->id]);
                 },
-                'contentOptions' => ['style' => 'width: 400px;'],
+              //  'contentOptions' => ['style' => 'width: 400px;'],
             ],
             [
                 'attribute' => 'contract_validity_from',
@@ -64,20 +67,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]
                     ]) . '</div>',
                 'format' => ['date', 'php:Y-m-d']
-            ],
-            [
-                'attribute' => 'routing',
-                'value' => function ($data) {
-                    /* @var $data Contract */
-                    return strip_tags($data->routing);
-                },
-            ],
-            [
-                'attribute' => 'infant_fares',
-                'value' => function ($data) {
-                    /* @var $data Contract */
-                    return strip_tags($data->infant_fares);
-                },
             ],
             //'routing',
             //'infant_fares',

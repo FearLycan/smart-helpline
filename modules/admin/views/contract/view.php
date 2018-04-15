@@ -1,6 +1,8 @@
 <?php
 
+use kartik\select2\Select2;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -38,42 +40,144 @@ $this->params['breadcrumbs'][] = $this->title;
             'airline_name',
             [
                 'label' => 'Contract Validity',
-                'value' => date("Y-m-d", strtotime($model->contract_validity_from)) . ' to ' . date("Y-m-d", strtotime($model->contract_validity_to)) . ', ' . $model->contract_description,
+                'value' => date("Y-m-d", strtotime($model->contract_validity_from)) . ' to ' . date("Y-m-d", strtotime($model->contract_validity_to)),
             ],
-            // 'contract_validity_from',
-            // 'contract_validity_to',
-            //'routing',
             [
+                'label' => 'Description',
+                'value' => $model->contract_description,
+            ],
+            /*[
                 'label' => 'Routing No. 1',
                 'value' => $model->routing_subcat_1 . ' ' . $model->routing_subcat_1_description
             ],
             [
                 'label' => 'Routing No. 2',
                 'value' => $model->routing_subcat_2 . ' ' . $model->routing_subcat_2_description
-            ],
-            //'routing_subcat_1',
-            //'routing_subcat_2',
-            //'infant_fares',
-            [
-                'attribute' => 'infant_fares',
-                'format' => 'raw',
-            ],
-            'ticket_designator:raw',
-            'tour_code:raw',
-            'endorsment:raw',
-            'mixed_classes:raw',
-            'interline:raw',
-            'codeshares:raw',
+            ],*/
             [
                 'label' => 'Autor',
                 'format' => 'raw',
                 'value' => Html::a($model->author->lastname . ' ' . $model->author->name, ['user/view', 'id' => $model->author->id]),
             ],
-            'note:raw',
             'created_at:raw',
             'updated_at:raw',
         ],
     ]) ?>
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <?php $form = ActiveForm::begin(['id' => 'contract-form']); ?>
+
+        <div class="col-md-12">
+            <?= $form->field($quickUserForm, 'users')->widget(Select2::classname(), [
+                'data' => $users,
+                'size' => Select2::LARGE,
+                'theme' => Select2::THEME_BOOTSTRAP,
+                'options' => ['placeholder' => 'Select users ...', 'multiple' => true],
+                'pluginOptions' => [
+                    'allowClear' => true,
+                    'multiple' => true
+                ],
+            ]); ?>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            </div>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <?php if (!empty($model->infant_fares)): ?>
+            <div class="col-md-12">
+                <h3>Infant fares</h3>
+                <?= $model->infant_fares ?>
+                <hr>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($model->ticket_designator)): ?>
+            <div class="col-md-12">
+                <h3>Ticket designator</h3>
+                <?= $model->ticket_designator ?>
+                <hr>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($model->tour_code)): ?>
+            <div class="col-md-12">
+                <h3>Tour code</h3>
+                <?= $model->tour_code ?>
+                <hr>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($model->endorsment)): ?>
+            <div class="col-md-12">
+                <h3>Endorsment</h3>
+                <?= $model->endorsment ?>
+                <hr>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($model->mixed_classes)): ?>
+            <div class="col-md-12">
+                <h3>Mixed classes</h3>
+                <?= $model->mixed_classes ?>
+                <hr>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($model->interline)): ?>
+            <div class="col-md-12">
+                <h3>Interline</h3>
+                <?= $model->interline ?>
+                <hr>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($model->codeshares)): ?>
+            <div class="col-md-12">
+                <h3>Codeshares</h3>
+                <?= $model->codeshares ?>
+                <hr>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($model->note)): ?>
+            <div class="col-md-12">
+                <h3>Additional Notes</h3>
+                <?= $model->note ?>
+                <hr>
+            </div>
+        <?php endif; ?>
+
+        <?php if (!empty($model->additional_fields)): ?>
+
+            <?php for ($i = 1; $i < count($model->getAdditionalFields()); $i += 2): ?>
+                <div class="col-md-12">
+                    <h3><?= $model->getAdditionalFields()[$i - 1] ?></h3>
+                    <?= $model->getAdditionalFields()[$i] ?>
+                    <hr>
+                </div>
+            <?php endfor; ?>
+
+        <?php endif; ?>
+    </div>
 
     <div class="row">
         <div class="col-md-12">

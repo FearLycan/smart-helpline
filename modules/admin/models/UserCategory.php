@@ -18,4 +18,24 @@ class UserCategory extends \app\models\UserCategory
             $category->delete();
         }
     }
+
+    public static function makeConnection($users, $category_id)
+    {
+        $categories = self::find()->where(['category_id' => $category_id])->all();
+
+        foreach ($categories as $category) {
+            $category->delete();
+        }
+
+        if (!empty($users)) {
+            foreach ($users as $user) {
+                $con = new UserCategory();
+                $con->category_id = $category_id;
+                $con->user_id = $user;
+                $con->save();
+
+                unset($con);
+            }
+        }
+    }
 }

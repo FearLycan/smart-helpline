@@ -29,13 +29,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn', 'contentOptions' => ['style' => 'width: 40px;']],
             [
-                'label' => 'Last Name',
-                'attribute' => 'lastname',
+                'label' => 'Name',
+                'attribute' => 'name',
                 'contentOptions' => ['style' => 'width: 150px;'],
             ],
             [
-                'label' => 'Name',
-                'attribute' => 'name',
+                'label' => 'Last Name',
+                'attribute' => 'lastname',
                 'contentOptions' => ['style' => 'width: 150px;'],
             ],
             [

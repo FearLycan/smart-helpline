@@ -8,6 +8,7 @@ use app\models\CategorySearch;
 use app\models\File;
 use app\models\FileSearch;
 use app\models\User;
+use app\models\UserCategory;
 use Yii;
 use app\components\Controller;
 use yii\filters\VerbFilter;
@@ -95,6 +96,15 @@ class SiteController extends Controller
      */
     public function actionView($id)
     {
+        $can = UserCategory::find()
+            ->where(['category_id' => $id, 'user_id' => Yii::$app->user->identity->id])
+            ->one();
+
+        if(empty($can)){
+            $this->accessDenied();
+        }
+
+
         $category = Category::findOne($id);
 
         $query = File::find()->where(['category_id' => $id]);

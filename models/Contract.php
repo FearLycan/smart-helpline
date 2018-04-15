@@ -27,6 +27,7 @@ namespace app\models;
  * @property string $routing_subcat_1_description
  * @property string $routing_subcat_2
  * @property string $routing_subcat_2_description
+ * @property string $additional_fields
  *
  * @property User $author
  */
@@ -51,7 +52,7 @@ class Contract extends \yii\db\ActiveRecord
             [['author_id'], 'integer'],
             [[
                 'routing_subcat_1', 'routing_subcat_1', 'routing_subcat_1_description','routing_subcat_2_description', 'mixed_classes', 'airline_name', 'routing', 'infant_fares', 'ticket_designator',
-                'tour_code', 'endorsment', 'interline', 'codeshares', 'note'
+                'tour_code', 'endorsment', 'interline', 'codeshares', 'note', 'additional_fields'
             ], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
         ];
@@ -80,6 +81,7 @@ class Contract extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'contract_description' => 'Contract Description',
             'note' => 'Additional Notes',
+            'additional_fields' => 'Additional Fields',
         ];
     }
 
@@ -97,5 +99,21 @@ class Contract extends \yii\db\ActiveRecord
     public function getLinkedUsers()
     {
         return $this->hasMany(UserContract::className(), ['contract_id' => 'id']);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAdditionalFields()
+    {
+        return json_decode($this->additional_fields, true);
+    }
+
+    /**
+     * @param $value
+     */
+    public function setAdditionalFields($value)
+    {
+        $this->additional_fields = json_encode($value);
     }
 }

@@ -2,18 +2,14 @@
 
 namespace app\modules\admin\models;
 
+use app\models\UserAfterHours;
 use app\modules\admin\components\AuthorBehavior;
 use app\modules\admin\components\Helpers;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
-/**
- * This is the model class for table "{{%contract}}".
- *
- * @author Damian Brończyk <damian.bronczyk@gmail.pl>
- */
-class Contract extends \app\models\Contract
+class AfterHours extends \app\models\AfterHours
 {
     public function behaviors()
     {
@@ -47,6 +43,26 @@ class Contract extends \app\models\Contract
             return true;
         } else {
             return false;
+        }
+    }
+
+    public static function makeConnection($users, $hour_id)
+    {
+        $hours = UserAfterHours::find()->where(['hour_id' => $hour_id])->all();
+
+        foreach ($hours as $hour) {
+            $hour->delete();
+        }
+
+        if (!empty($users)) {
+            foreach ($users as $user) {
+                $con = new UserAfterHours();
+                $con->hour_id = $hour_id;
+                $con->user_id = $user;
+                $con->save();
+
+                unset($con);
+            }
         }
     }
 }

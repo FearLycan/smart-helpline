@@ -1,120 +1,23 @@
 <?php
 
 use app\modules\admin\components\Helpers;
-use app\modules\admin\models\forms\ContractForm;
-use dominus77\tinymce\components\MihaildevElFinder;
-use dosamigos\ckeditor\CKEditor;
-use dosamigos\tinymce\TinyMce;
-use kartik\date\DatePicker;
 use yii\helpers\Html;
-use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
+use dosamigos\tinymce\TinyMce;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\admin\models\Contract */
+/* @var $model app\modules\admin\models\AfterHours */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="contract-form">
+<div class="after-hours-form">
 
-    <?php $form = ActiveForm::begin(['id' => 'contract-form']); ?>
+    <?php $form = ActiveForm::begin(['id' => 'after-hours-form']); ?>
 
-    <?= $form->errorSummary($model); ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'airline_name')->textInput(['maxlength' => true]) ?>
-
-    <div class="row">
-        <div class="col-md-4">
-            <?= $form->field($model, 'contract_validity_from')->widget(DatePicker::classname(), [
-                'options' => ['placeholder' => 'Choose date'],
-                'type' => DatePicker::TYPE_INPUT,
-                'pluginOptions' => [
-                    'autoclose' => true,
-                    'format' => 'yyyy-mm-dd'
-                ]
-            ]) ?>
-        </div>
-
-        <div class="col-md-4">
-            <?= $form->field($model, 'contract_validity_to')->widget(DatePicker::classname(), [
-                'options' => ['placeholder' => 'Choose date'],
-                'type' => DatePicker::TYPE_INPUT,
-                'pluginOptions' => [
-                    'autoclose' => true,
-                    'format' => 'yyyy-mm-dd'
-                ]
-            ]) ?>
-        </div>
-
-        <div class="col-md-4">
-            <?= $form->field($model, 'contract_description')->textInput(['maxlength' => true]) ?>
-        </div>
-    </div>
-
-    <!--<div class="row">
-
-        <div class="col-md-6">
-            <?/*= $form->field($model, 'routing_subcat_1')->textInput(['maxlength' => true])->label('Between No. 1') */?>
-        </div>
-
-        <div class="col-md-6">
-            <?/*= $form->field($model, 'routing_subcat_1_description')->textInput(['maxlength' => true])->label('Between No. 1 Description') */?>
-        </div>
-
-        <div class="col-md-6">
-            <?/*= $form->field($model, 'routing_subcat_2')->textInput(['maxlength' => true])->label('Between No. 2') */?>
-        </div>
-
-        <div class="col-md-6">
-            <?/*= $form->field($model, 'routing_subcat_2_description')->textInput(['maxlength' => true])->label('Between No. 2 Description') */?>
-        </div>
-
-    </div>-->
-
-    <?= $form->field($model, 'infant_fares')->widget(TinyMce::className(), [
-        'options' => ['rows' => 3],
-        'language' => 'en',
-        'clientOptions' => Helpers::getTinyMceOptions()
-    ]); ?>
-
-    <?= $form->field($model, 'ticket_designator')->widget(TinyMce::className(), [
-        'options' => ['rows' => 3],
-        'language' => 'en',
-        'clientOptions' => Helpers::getTinyMceOptions()
-    ]); ?>
-
-    <?= $form->field($model, 'tour_code')->widget(TinyMce::className(), [
-        'options' => ['rows' => 3],
-        'language' => 'en',
-        'clientOptions' => Helpers::getTinyMceOptions()
-    ]); ?>
-
-    <?= $form->field($model, 'endorsment')->widget(TinyMce::className(), [
-        'options' => ['rows' => 3],
-        'language' => 'en',
-        'clientOptions' => Helpers::getTinyMceOptions()
-    ]); ?>
-
-    <?= $form->field($model, 'mixed_classes')->widget(TinyMce::className(), [
-        'options' => ['rows' => 3],
-        'language' => 'en',
-        'clientOptions' => Helpers::getTinyMceOptions()
-    ]); ?>
-
-    <?= $form->field($model, 'interline')->widget(TinyMce::className(), [
-        'options' => ['rows' => 3],
-        'language' => 'en',
-        'clientOptions' => Helpers::getTinyMceOptions()
-    ]); ?>
-
-    <?= $form->field($model, 'codeshares')->widget(TinyMce::className(), [
-        'options' => ['rows' => 3],
-        'language' => 'en',
-        'clientOptions' => Helpers::getTinyMceOptions()
-    ]); ?>
-
-    <?= $form->field($model, 'note')->widget(TinyMce::className(), [
-        'options' => ['rows' => 5],
+    <?= $form->field($model, 'description')->widget(TinyMce::className(), [
+        'options' => ['rows' => 6],
         'language' => 'en',
         'clientOptions' => Helpers::getTinyMceOptions()
     ]); ?>
@@ -138,6 +41,7 @@ use yii\widgets\ActiveForm;
             <hr>
         </div>
     </div>
+
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
@@ -172,7 +76,7 @@ use yii\widgets\ActiveForm;
             '<div class="col-md-6" data-id="' + i + '">' +
             '<div class="form-group">' +
             '<label for="new_value_' + i + '">Value</label>' +
-            '<input type="text" value="' + array[j] + '" class="form-control" data-id="' + i + '" id="new_value_' +i + '" name="new_value_' + i + '" required>' +
+            '<input type="text" value="' + array[j] + '" class="form-control" data-id="' + i + '" id="new_value_' + i + '" name="new_value_' + i + '" required>' +
             '</div>' +
             '</div>' +
             '');
@@ -219,6 +123,7 @@ use yii\widgets\ActiveForm;
             $('div[data-id="' + id + '"]').remove();
         });
 
+
     });
 
     $(".remove").click(function () {
@@ -226,7 +131,7 @@ use yii\widgets\ActiveForm;
         $('div[data-id="' + id + '"]').remove();
     });
 
-    $('#contract-form').on('beforeSubmit', function (e) {
+    $('#after-hours-form').on('beforeSubmit', function (e) {
 
         var array = [];
         $('#fields :input').each(function () {
@@ -235,13 +140,12 @@ use yii\widgets\ActiveForm;
 
         var json = JSON.stringify(array);
 
-        $("#contractform-additional_fields").val(json);
+        console.log(json);
+
+        $("#afterhours-additional_fields").val(json);
 
         return true;
     });
 
 </script>
 <?php $this->endBlock() ?>
-
-
-

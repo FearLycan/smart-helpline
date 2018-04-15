@@ -18,4 +18,24 @@ class UserContract extends \app\models\UserContract
             $contract->delete();
         }
     }
+
+    public static function makeConnection($users, $contract_id)
+    {
+        $contracts = self::find()->where(['contract_id' => $contract_id])->all();
+
+        foreach ($contracts as $contract) {
+            $contract->delete();
+        }
+
+        if (!empty($users)) {
+            foreach ($users as $user) {
+                $con = new UserContract();
+                $con->contract_id = $contract_id;
+                $con->user_id = $user;
+                $con->save();
+
+                unset($con);
+            }
+        }
+    }
 }

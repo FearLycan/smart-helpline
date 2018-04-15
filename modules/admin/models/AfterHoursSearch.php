@@ -1,21 +1,19 @@
 <?php
 
-namespace app\models;
+namespace app\modules\admin\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use app\modules\admin\models\AfterHours;
 
 /**
- * CategorySearch represents the model behind the search form of `app\modules\admin\models\Category`.
+ * AfterHoursSearch represents the model behind the search form of `app\modules\admin\models\AfterHours`.
  */
-class CategorySearch extends Category
+class AfterHoursSearch extends AfterHours
 {
-
     public $name;
-    public $description;
     public $created_at;
-    public $updated_at;
     public $author;
 
     /**
@@ -24,7 +22,7 @@ class CategorySearch extends Category
     public function rules()
     {
         return [
-            [['name', 'description', 'created_at', 'author', 'updated_at'], 'string'],
+            [['name', 'created_at', 'author'], 'safe'],
         ];
     }
 
@@ -44,21 +42,21 @@ class CategorySearch extends Category
      *
      * @return ActiveDataProvider
      */
-    public function search($params, $query)
+    public function search($params)
     {
-        $query->joinWith(['author author']);
+        $query = AfterHours::find();
 
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder' => ['name' => SORT_ASC]],
         ]);
 
         $dataProvider->sort->attributes['author'] = [
             'asc' => ['author.name' => SORT_ASC],
             'desc' => ['author.name' => SORT_DESC],
         ];
+
 
         $this->load($params);
 
@@ -68,15 +66,17 @@ class CategorySearch extends Category
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'category.name', $this->name])
-            ->andFilterWhere(['like', 'category.description', $this->description])
-            ->andFilterWhere(['like', 'category.created_at', $this->created_at])
-            ->andFilterWhere(['like', 'category.updated_at', $this->updated_at])
-            ->andFilterWhere([
-                'or',
-                ['like', 'author.name', $this->author],
-                ['like', 'author.lastname', $this->author],
-            ]);
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+            'author_id' => $this->author_id,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+        ]);
+
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'additional_fields', $this->additional_fields]);
 
         return $dataProvider;
     }

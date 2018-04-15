@@ -39,6 +39,7 @@ AppAsset::register($this);
     $menuItems[] = ['label' => 'Categories', 'url' => ['category/index']];
     $menuItems[] = ['label' => 'Files', 'url' => ['file/index']];
     $menuItems[] = ['label' => 'Contracts', 'url' => ['contract/index']];
+    $menuItems[] = ['label' => 'After Hours', 'url' => ['after-hours/index']];
 
     if (!Yii::$app->user->isGuest) {
         $menuItems[] = [

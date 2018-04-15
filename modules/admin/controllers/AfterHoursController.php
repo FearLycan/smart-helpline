@@ -2,23 +2,22 @@
 
 namespace app\modules\admin\controllers;
 
-use app\modules\admin\components\Controller;
-use app\modules\admin\models\File;
-use app\modules\admin\models\forms\ContractForm;
+use app\models\UserAfterHours;
+use app\modules\admin\models\forms\HoursForm;
 use app\modules\admin\models\forms\QuickUserForm;
 use app\modules\admin\models\User;
-use app\modules\admin\models\UserContract;
 use Yii;
-use app\modules\admin\models\Contract;
-use app\modules\admin\models\ContractSearch;
+use app\modules\admin\models\AfterHours;
+use app\modules\admin\models\AfterHoursSearch;
+use app\modules\admin\components\Controller;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ContractController implements the CRUD actions for Contract model.
+ * AfterHoursController implements the CRUD actions for AfterHours model.
  */
-class ContractController extends Controller
+class AfterHoursController extends Controller
 {
     /**
      * @inheritdoc
@@ -36,12 +35,12 @@ class ContractController extends Controller
     }
 
     /**
-     * Lists all Contract models.
+     * Lists all AfterHours models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ContractSearch();
+        $searchModel = new AfterHoursSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -51,23 +50,17 @@ class ContractController extends Controller
     }
 
     /**
-     * Displays a single Contract model.
+     * Displays a single AfterHours model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-        $model = $this->findModel($id);
-
-        $files = File::find()
-            ->where(['contract_id' => $id])
-            ->all();
-
         $users = ArrayHelper::map(User::find()->select(['id', new \yii\db\Expression("CONCAT(`name`, ' ', `lastname`) as name")])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
 
         $quickUserForm = new QuickUserForm();
 
-        $us = UserContract::find()->where(['contract_id' => $id])->all();
+        $us = UserAfterHours::find()->where(['hour_id' => $id])->all();
 
         $tab = [];
         foreach ($us as $u) {
@@ -79,28 +72,28 @@ class ContractController extends Controller
         if ($quickUserForm->load(Yii::$app->request->post())) {
 
             if ($quickUserForm->users != $tab) {
-                UserContract::makeConnection($quickUserForm->users, $id);
+                AfterHours::makeConnection($quickUserForm->users, $id);
             }
 
-            return $this->redirect(['contract/view', 'id' => $id]);
+            return $this->redirect(['after-hours/view', 'id' => $id]);
         }
 
+
         return $this->render('view', [
-            'model' => $model,
-            'files' => $files,
+            'model' => $this->findModel($id),
             'users' => $users,
             'quickUserForm' => $quickUserForm,
         ]);
     }
 
     /**
-     * Creates a new Contract model.
+     * Creates a new AfterHours model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new ContractForm();
+        $model = new HoursForm();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -112,7 +105,7 @@ class ContractController extends Controller
     }
 
     /**
-     * Updates an existing Contract model.
+     * Updates an existing AfterHours model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -120,7 +113,6 @@ class ContractController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        //$model->scenario = ContractForm::SCENARIO_UPDATE;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -132,7 +124,7 @@ class ContractController extends Controller
     }
 
     /**
-     * Deletes an existing Contract model.
+     * Deletes an existing AfterHours model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -145,15 +137,15 @@ class ContractController extends Controller
     }
 
     /**
-     * Finds the Contract model based on its primary key value.
+     * Finds the AfterHours model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Contract the loaded model
+     * @return AfterHours the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ContractForm::findOne($id)) !== null) {
+        if (($model = AfterHours::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

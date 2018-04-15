@@ -1,27 +1,23 @@
 <?php
 
-use app\modules\admin\components\Helpers;
 use kartik\select2\Select2;
-use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\admin\models\Category */
-/* @var $searchModel app\modules\admin\models\FileSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+/* @var $model app\modules\admin\models\AfterHours */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'After Hours', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="category-view">
+<div class="after-hours-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Edit', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
@@ -29,26 +25,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Upload files', ['file/create', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'name:raw',
+            'name:ntext',
             [
-                'label' => 'Description',
+                'label' => 'Autor',
                 'format' => 'raw',
-                'value' => $model->description
+                'value' => Html::a($model->author->name . ' ' . $model->author->lastname, ['user/view', 'id' => $model->author->id]),
             ],
-            //'description:ntext',
-            [
-                'label' => 'Author',
-                'format' => 'raw',
-                'value' => Html::a($model->author->lastname . ' ' . $model->author->name, ['user/view', 'id' => $model->author->id]),
-            ],
-            'created_at:raw',
-            'updated_at:raw',
+            'created_at',
+            'updated_at',
         ],
     ]) ?>
 
@@ -89,14 +78,26 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    <h2>Files in this Category</h2>
+    <div class="row">
+        <?php if (!empty($model->description)): ?>
+            <div class="col-md-12">
+                <h3>Description</h3>
+                <?= $model->description ?>
+                <hr>
+            </div>
+        <?php endif; ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'options' => ['class' => 'grid-view table-responsive'],
-        'columns' => Helpers::getColumnsFileGride(),
-    ]); ?>
+        <?php if (!empty($model->additional_fields)): ?>
 
+            <?php for ($i = 1; $i < count($model->getAdditionalFields()); $i += 2): ?>
+                <div class="col-md-12">
+                    <h3><?= $model->getAdditionalFields()[$i - 1] ?></h3>
+                    <?= $model->getAdditionalFields()[$i] ?>
+                    <hr>
+                </div>
+            <?php endfor; ?>
+
+        <?php endif; ?>
+    </div>
 
 </div>
