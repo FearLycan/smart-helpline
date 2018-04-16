@@ -16,16 +16,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <h1><?= $this->title ?></h1>
 
+<p><strong>Author: </strong><?= Html::encode($category->author->name . ' ' . $category->author->lastname) ?></p>
+<p><strong>Created at: </strong><?= Html::encode($category->created_at) ?></p>
+<p><strong>Updated at: </strong><?= Html::encode($category->updated_at) ?></p>
+
 <div class="row">
     <div class="col-md-12">
         <h3>Description</h3>
         <?= $category->description ?>
     </div>
 </div>
-
-<p><strong>Author: </strong><?= Html::encode($category->author->name . ' ' . $category->author->lastname) ?></p>
-<p><strong>Created at: </strong><?= Html::encode($category->created_at) ?></p>
-<p><strong>Updated at: </strong><?= Html::encode($category->updated_at) ?></p>
 
 <hr>
 
