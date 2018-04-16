@@ -2,6 +2,7 @@
 
 namespace app\modules\admin\models;
 
+use app\modules\admin\components\Helpers;
 use app\modules\admin\components\AuthorBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -31,5 +32,21 @@ class Category extends \app\models\Category
                 'value' => Yii::$app->user->id,
             ]
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        if (parent::beforeSave($insert)) {
+            foreach ($this->getAttributes() as $key => $item){
+                $this->{$key} = Helpers::checkString($item);
+            }
+
+            return true;
+        } else {
+            return false;
+        }
     }
 }
