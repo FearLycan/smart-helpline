@@ -22,7 +22,10 @@ $this->title = 'Smart Helpline';
         'filterModel' => $searchModel,
         'options' => ['class' => 'grid-view table-responsive'],
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            [
+                'class' => 'yii\grid\SerialColumn',
+                'contentOptions' => ['style' => 'width: 45px;'],
+            ],
             [
                 'attribute' => 'name',
                 'format' => 'raw',
