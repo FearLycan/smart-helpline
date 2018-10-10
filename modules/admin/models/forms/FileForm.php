@@ -6,6 +6,7 @@ namespace app\modules\admin\models\forms;
 
 use app\modules\admin\models\File;
 use Yii;
+use yii\helpers\Inflector;
 
 class FileForm extends File
 {
@@ -49,7 +50,7 @@ class FileForm extends File
 
                 $name = $file->baseName;
                 $real_name = Yii::$app->security->generateRandomString() . '-' . $name . '.' . $file->extension;
-
+                $real_name = Inflector::slug($real_name);
                 $file->saveAs('files/' . $real_name);
 
                 $f->name = $name;

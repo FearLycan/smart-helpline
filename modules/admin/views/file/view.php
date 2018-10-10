@@ -13,6 +13,9 @@ use yii\widgets\DetailView;
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Files', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+$url = Url::to(['/files/' . $model->real_name] ,true);
+$scr = "https://docs.google.com/gview?url=" . $url . "&embedded=true";
 ?>
 <div class="category-view">
 
@@ -65,12 +68,9 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row">
             <div class="col-md-12">
                 <h3>Podgląd pliku <?= Html::encode($model->name) ?></h3>
-                <p>
-                    <?= Url::to(['/files/' . $model->real_name], true) ?>
-                </p>
                 <hr>
                 <iframe style="width: 100%; height: 600px;" class="doc"
-                        src="https://docs.google.com/gview?url="<?= Url::to(['/files/' . $model->real_name], true) ?>"&embedded=true"></iframe>
+                        src="<?= $scr ?>"></iframe>
             </div>
         </div>
     <?php endif; ?>
