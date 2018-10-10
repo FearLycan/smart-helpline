@@ -14,7 +14,7 @@ $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Files', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 
-$url = Url::to(['/files/' . $model->real_name] ,true);
+$url = Url::to(['/files/' . $model->real_name], true);
 $scr = "https://docs.google.com/gview?url=" . $url . "&embedded=true";
 ?>
 <div class="category-view">
@@ -69,8 +69,15 @@ $scr = "https://docs.google.com/gview?url=" . $url . "&embedded=true";
             <div class="col-md-12">
                 <h3>Podgląd pliku <?= Html::encode($model->name) ?></h3>
                 <hr>
-                <iframe style="width: 100%; height: 600px;" class="doc"
-                        src="<?= $scr ?>"></iframe>
+
+                <iframe src="https://view.officeapps.live.com/op/embed.aspx?src=<?= $url ?>"
+                        width='100%' height='600px' frameborder='0'>This is an embedded
+                    <a target='_blank' href='http://office.com'>
+                        Microsoft
+                        Office</a> document, powered by <a target='_blank' href='http://office.com/webapps'>Office
+                        Online</a>.
+                </iframe>
+
             </div>
         </div>
     <?php endif; ?>
