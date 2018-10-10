@@ -37,12 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'name:raw',
             [
-                'label' => 'Description',
-                'format' => 'raw',
-                'value' => $model->description
-            ],
-            //'description:ntext',
-            [
                 'label' => 'Author',
                 'format' => 'raw',
                 'value' => Html::a($model->author->lastname . ' ' . $model->author->name, ['user/view', 'id' => $model->author->id]),
@@ -51,6 +45,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at:raw',
         ],
     ]) ?>
+
+    <div class="row">
+        <?php if (!empty($model->description)): ?>
+            <div class="col-md-12">
+                <h3>Description</h3>
+                <?= $model->description ?>
+            </div>
+        <?php endif; ?>
+    </div>
 
     <div class="row">
         <div class="col-md-12">

@@ -48,10 +48,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         ]
                     ]) . '</div>',
             ],
-            [
-                'contentOptions' => ['style' => 'width: 70px;'],
-                'class' => 'yii\grid\ActionColumn'
-            ],
         ],
     ]); ?>
     <?php Pjax::end(); ?>
