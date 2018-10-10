@@ -72,7 +72,7 @@ class Contract extends \yii\db\ActiveRecord
             'infant_fares' => 'Infant Fares',
             'ticket_designator' => 'Ticket Designator',
             'tour_code' => 'Tour Code',
-            'endorsment' => 'Endorsment',
+            'endorsment' => 'Endorsement',
             'mixed_classes' => 'Mixed Classes',
             'interline' => 'Interline',
             'codeshares' => 'Codeshares',

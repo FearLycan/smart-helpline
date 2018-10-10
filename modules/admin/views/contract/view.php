@@ -128,7 +128,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <?php if (!empty($model->endorsment)): ?>
             <div class="col-md-12">
-                <h3>Endorsment</h3>
+                <h3>Endorsement</h3>
                 <?= $model->endorsment ?>
                 <hr>
             </div>

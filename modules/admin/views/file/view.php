@@ -2,6 +2,7 @@
 
 use app\modules\admin\models\File;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -59,5 +60,19 @@ $this->params['breadcrumbs'][] = $this->title;
             'updated_at',
         ],
     ]) ?>
+
+    <?php if (in_array($model->format, File::formats())): ?>
+        <div class="row">
+            <div class="col-md-12">
+                <h3>Podgląd pliku <?= Html::encode($model->name) ?></h3>
+                <p>
+                    <?= Url::to(['/files/' . $model->real_name], true) ?>
+                </p>
+                <hr>
+                <iframe style="width: 100%; height: 600px;" class="doc"
+                        src="https://docs.google.com/gview?url="<?= Url::to(['/files/' . $model->real_name], true) ?>"&embedded=true"></iframe>
+            </div>
+        </div>
+    <?php endif; ?>
 
 </div>

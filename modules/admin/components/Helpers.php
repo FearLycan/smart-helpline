@@ -6,6 +6,7 @@ namespace app\modules\admin\components;
 use app\modules\admin\models\Category;
 use app\modules\admin\models\File;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\web\JsExpression;
 
 /**
@@ -57,6 +58,24 @@ class Helpers
                 },
             ],
             'created_at',
+            [
+                'format' => 'raw',
+                'value' => function ($data) {
+                    /* @var $data File */
+
+                    if (in_array($data->format, File::formats())) {
+                        $url = Url::to(['file/view', 'id' => $data->id]);
+                    } else {
+                        $url = Url::to(['/files/' . $data->real_name]);
+                    }
+
+                    return Html::a('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>', $url, [
+                        'class' => 'btn btn-info btn-xs',
+                        'data-pjax' => '0',
+                        'target' => '_blank',
+                    ]);
+                },
+            ],
             [
                 'format' => 'raw',
                 'value' => function ($data) {

@@ -40,7 +40,7 @@ class File extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'author_id','contract_id'], 'integer'],
+            [['category_id', 'author_id', 'contract_id'], 'integer'],
             [['created_at'], 'safe'],
             [['name', 'real_name', 'format', 'description'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
@@ -95,5 +95,10 @@ class File extends \yii\db\ActiveRecord
     public function hasContract()
     {
         return !empty($this->contract_id);
+    }
+
+    public static function formats()
+    {
+        return ['doc', 'docx', 'xlsx', 'xls'];
     }
 }
