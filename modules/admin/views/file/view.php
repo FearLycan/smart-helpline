@@ -70,13 +70,13 @@ $scr = "https://docs.google.com/gview?url=" . $url . "&embedded=true";
                 <h3>Podgląd pliku <?= Html::encode($model->name) ?></h3>
                 <hr>
 
-                <iframe src="https://view.officeapps.live.com/op/embed.aspx?src=<?= $url ?>"
-                        width='100%' height='600px' frameborder='0'>This is an embedded
-                    <a target='_blank' href='http://office.com'>
-                        Microsoft
-                        Office</a> document, powered by <a target='_blank' href='http://office.com/webapps'>Office
-                        Online</a>.
-                </iframe>
+<!--                <iframe src="https://view.officeapps.live.com/op/embed.aspx?src=--><?//= $url ?><!--"-->
+<!--                        width='100%' height='600px' frameborder='0'>This is an embedded-->
+<!--                    <a target='_blank' href='http://office.com'>-->
+<!--                        Microsoft-->
+<!--                        Office</a> document, powered by <a target='_blank' href='http://office.com/webapps'>Office-->
+<!--                        Online</a>.-->
+<!--                </iframe>-->
 
             </div>
         </div>

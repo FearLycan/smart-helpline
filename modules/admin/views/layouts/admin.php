@@ -40,7 +40,7 @@ AppAsset::register($this);
     $menuItems[] = ['label' => 'Files', 'url' => ['file/index']];
     $menuItems[] = ['label' => 'Contracts', 'url' => ['contract/index']];
     $menuItems[] = ['label' => 'After Hours', 'url' => ['after-hours/index']];
-    $menuItems[] = ['label' => 'Airlines', 'url' => ['airline/index']];
+//    $menuItems[] = ['label' => 'Airlines', 'url' => ['airline/index']];
 
     if (!Yii::$app->user->isGuest) {
         $menuItems[] = [
