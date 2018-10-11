@@ -1,6 +1,8 @@
 <?php
 
+use app\models\File;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -139,6 +141,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <th>Nazwa</th>
                             <th>Autor</th>
                             <th></th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -147,6 +150,18 @@ $this->params['breadcrumbs'][] = $this->title;
                                 <td width="30"><?= $key + 1 ?></td>
                                 <td><?= Html::a($file->name, ['site/download', 'id' => $file->id], ['data-pjax' => '0']); ?></td>
                                 <td width="250"><?= $file->author->name . ' ' . $file->author->lastname ?></td>
+                                <td width="70" class="text-center">
+                                    <?php if (in_array($file->format, File::formats())) {
+                                        $url = Url::to(['contract/file', 'id' => $file->id]);
+                                    } else {
+                                        $url = Url::to(['/files/' . $file->real_name]);
+                                    } ?>
+
+                                    <?= Html::a('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>', $url, [
+                                        'class' => 'btn btn-info btn-xs',
+                                        'data-pjax' => '0',
+                                    ]); ?>
+                                </td>
                                 <td width="70" class="text-center">
                                     <?= Html::a('Download', ['site/download', 'id' => $file->id], [
                                         'class' => 'btn btn-success btn-xs',

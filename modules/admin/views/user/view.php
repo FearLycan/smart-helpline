@@ -111,7 +111,7 @@ $this->params['breadcrumbs'][] = $this->title;
                        <thead>
                        <tr>
                            <th>#</th>
-                           <th width="400">Contracts</th>
+                           <th width="400">Contract</th>
                            <th></th>
                        </tr>
                        </thead>
@@ -141,6 +141,51 @@ $this->params['breadcrumbs'][] = $this->title;
                </div>
             <?php else: ?>
                 <p>No contracts assigned</p>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Airlines assigned</h3>
+
+            <?php if ($model->airlines): ?>
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th width="400">Airline</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <?php foreach ($model->airlines as $key => $airline): ?>
+                            <?php /* @var $contract \app\modules\admin\models\Contract */ ?>
+                            <tr>
+                                <td><?= $key + 1 ?></td>
+                                <td> <?= Html::a($airline->airline->name, ['airline/view', 'id' => $airline->airline_id]) ?> </td>
+                                <td>
+                                    <?= Html::a('Remove user form this airline', ['user/delete-link-airline',
+                                        'user_id' => $airline->user_id,
+                                        'airline_id' => $airline->airline_id
+                                    ],
+                                        [
+                                            'class' => 'btn btn-danger btn-xs',
+                                            'data-confirm' => 'Are you sure want to delete this element?',
+                                            'data-method' => 'post'
+                                        ]
+                                    ) ?>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php else: ?>
+                <p>No airlines assigned</p>
             <?php endif; ?>
         </div>
     </div>

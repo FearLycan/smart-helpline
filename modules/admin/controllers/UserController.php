@@ -5,6 +5,7 @@ namespace app\modules\admin\controllers;
 use app\models\UserCategory;
 use app\modules\admin\components\Controller;
 use app\modules\admin\models\forms\UserForm;
+use app\modules\admin\models\UserAirline;
 use app\modules\admin\models\UserContract;
 use Yii;
 use app\modules\admin\models\User;
@@ -180,6 +181,17 @@ class UserController extends Controller
     {
         $link = UserContract::find()
             ->where(['user_id' => $user_id, 'contract_id' => $contract_id])
+            ->one();
+
+        $link->delete();
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionDeleteLinkAirline($user_id, $airline_id)
+    {
+        $link = UserAirline::find()
+            ->where(['user_id' => $user_id, 'airline_id' => $airline_id])
             ->one();
 
         $link->delete();

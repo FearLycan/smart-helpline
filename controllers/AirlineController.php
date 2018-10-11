@@ -1,19 +1,26 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Damian Brończyk
+ * Date: 11.10.2018
+ * Time: 12:58
+ */
 
 namespace app\controllers;
 
-
 use app\components\AccessControl;
-use app\components\Controller;
-use app\models\Contract;
-use app\models\ContractSearch;
-use app\models\File;
+use app\models\Airline;
 use app\models\User;
-use app\models\UserContract;
+use app\models\UserAfterHours;
+use app\models\UserAirline;
+use app\modules\admin\models\AirlineSearch;
 use Yii;
+use app\models\AfterHours;
+use app\models\AfterHoursSearch;
+use app\components\Controller;
 use yii\web\NotFoundHttpException;
 
-class ContractController extends Controller
+class AirlineController extends Controller
 {
     /**
      * @inheritdoc
@@ -38,17 +45,17 @@ class ContractController extends Controller
     }
 
     /**
-     * Lists all Contract models.
+     * Lists all AfterHours models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $query = Contract::find()
-            ->joinWith('linkedUsers cat')
-            ->where(['cat.user_id' => Yii::$app->user->identity->id]);
+        $query = AfterHours::find()
+            ->joinWith('userAirlines airline')
+            ->where(['airline.user_id' => Yii::$app->user->identity->id]);
 
 
-        $searchModel = new ContractSearch();
+        $searchModel = new AirlineSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
 
         return $this->render('index', [
@@ -58,50 +65,35 @@ class ContractController extends Controller
     }
 
     /**
-     * Displays a single Contract model.
+     * Displays a single AfterHours model.
      * @param integer $id
      * @return mixed
      */
     public function actionView($id)
     {
-        $can = UserContract::find()
-            ->where(['contract_id' => $id, 'user_id' => Yii::$app->user->identity->id])
+        $can = UserAirline::find()
+            ->where(['airline_id' => $id, 'user_id' => Yii::$app->user->identity->id])
             ->one();
 
         if(empty($can)){
             $this->accessDenied();
         }
 
-
-        $files = File::find()
-            ->where(['contract_id' => $id])
-            ->all();
-
         return $this->render('view', [
             'model' => $this->findModel($id),
-            'files' => $files
-        ]);
-    }
-
-    public function actionFile($id)
-    {
-        $model = File::findOne($id);
-
-        return $this->render('file', [
-            'model' => $model,
         ]);
     }
 
     /**
-     * Finds the Contract model based on its primary key value.
+     * Finds the AfterHours model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Contract the loaded model
+     * @return AfterHours the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Contract::findOne($id)) !== null) {
+        if (($model = Airline::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

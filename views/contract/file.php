@@ -11,7 +11,7 @@ use yii\widgets\DetailView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Category', 'url' => ['view', 'id' => $model->category_id]];
+$this->params['breadcrumbs'][] = ['label' => 'Contract', 'url' => ['view', 'id' => $model->category_id]];
 $this->params['breadcrumbs'][] = ['label' => 'Files', 'url' => ['view', 'id' => $model->category_id]];
 $this->params['breadcrumbs'][] = $this->title;
 
@@ -23,7 +23,7 @@ $scr = "https://docs.google.com/gview?url=" . $url . "&embedded=true";
     <h1>File name: <?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Download', ['download', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
+        <?= Html::a('Download', ['site/download', 'id' => $model->id], ['class' => 'btn btn-warning']) ?>
     </p>
 
     <?= DetailView::widget([
@@ -35,11 +35,6 @@ $scr = "https://docs.google.com/gview?url=" . $url . "&embedded=true";
                 'label' => 'Author',
                 'format' => 'raw',
                 'value' => $model->author->lastname . ' ' . $model->author->name,
-            ],
-            [
-                'label' => 'Category',
-                'format' => 'raw',
-                'value' => $model->category->name,
             ],
             'created_at',
             'updated_at',

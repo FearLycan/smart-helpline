@@ -35,6 +35,10 @@ $this->title = 'Smart Helpline';
                 },
             ],
             [
+                'attribute' => 'updated_at',
+                'contentOptions' => ['style' => 'width: 150px; text-align: center;'],
+            ],
+            [
                 'attribute' => 'author',
                 'label' => 'Author',
                 'value' => function ($data) {
@@ -42,11 +46,7 @@ $this->title = 'Smart Helpline';
                     return $data->author->lastname . ' ' . $data->author->name;
                 },
                 'contentOptions' => ['style' => 'width: 150px; text-align: center;'],
-            ],
-            [
-                'attribute' => 'updated_at',
-                'contentOptions' => ['style' => 'width: 150px; text-align: center;'],
-            ],
+            ]
         ],
     ]); ?>
     <?php Pjax::end(); ?>

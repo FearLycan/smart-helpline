@@ -49,8 +49,8 @@ class FileForm extends File
                 $f = new File();
 
                 $name = $file->baseName;
-                $real_name = Yii::$app->security->generateRandomString() . '-' . $name . '.' . $file->extension;
-                $real_name = Inflector::slug($real_name);
+                $real_name = Yii::$app->security->generateRandomString() . '-' . $name;
+                $real_name = Inflector::slug($real_name) . '.' . $file->extension;
                 $file->saveAs('files/' . $real_name);
 
                 $f->name = $name;

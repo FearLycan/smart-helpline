@@ -164,6 +164,14 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getAirlines()
+    {
+        return $this->hasMany(UserAirline::className(), ['user_id' => 'id']);
+    }
+
+    /**
      * Finds an identity by the given ID.
      *
      * @param string|int $id the ID to be looked for

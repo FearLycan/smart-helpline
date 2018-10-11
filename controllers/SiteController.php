@@ -100,7 +100,7 @@ class SiteController extends Controller
             ->where(['category_id' => $id, 'user_id' => Yii::$app->user->identity->id])
             ->one();
 
-        if(empty($can)){
+        if (empty($can)) {
             $this->accessDenied();
         }
 
@@ -128,17 +128,16 @@ class SiteController extends Controller
     {
         $model = File::findOne($id);
 
-        if($model->hasContract()){
-            $path = Yii::getAlias('@app/web/files/' . $model->real_name);
 
-            if (file_exists($path)) {
-                return Yii::$app->response->sendFile($path, $model->name . '.' . $model->format);
-            } else {
-                $this->notFound();
-            }
+        $path = Yii::getAlias('@app/web/files/' . $model->real_name);
+
+        if (file_exists($path)) {
+            return Yii::$app->response->sendFile($path, $model->name . '.' . $model->format);
+        } else {
+            $this->notFound();
         }
 
-        if (empty($model) || !Yii::$app->user->identity->canSeeThisCategory($model->category_id) || !$model->hasContract()) {
+        if (empty($model) || !Yii::$app->user->identity->canSeeThisCategory($model->category_id)) {
             $this->accessDenied();
         } else {
             $path = Yii::getAlias('@app/web/files/' . $model->real_name);

@@ -8,6 +8,7 @@
 use app\models\File;
 use yii\grid\GridView;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = $category->name;
 $this->params['breadcrumbs'][] = ['label' => 'Kategoria', 'url' => ['index']];
@@ -76,6 +77,26 @@ $this->params['breadcrumbs'][] = $this->title;
         [
             'attribute' => 'created_at',
             'contentOptions' => ['style' => 'width: 150px;'],
-        ]
+        ],
+        [
+            'label' => '',
+            'format' => 'raw',
+            'contentOptions' => ['style' => 'width: 50px; text-align:center;'],
+            'value' => function ($data) {
+                /* @var $data File */
+
+                if (in_array($data->format, File::formats())) {
+                    $url = Url::to(['site/file', 'id' => $data->id]);
+                } else {
+                    $url = Url::to(['/files/' . $data->real_name]);
+                }
+
+                return Html::a('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>', $url, [
+                    'class' => 'btn btn-info btn-xs',
+                    'data-pjax' => '0',
+                    'target' => '_blank',
+                ]);
+            },
+        ],
     ],
 ]); ?>
