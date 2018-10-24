@@ -31,11 +31,13 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <?php if($dataProvider->getTotalCount()): ?>
+
     <h2>Folders in folder <strong><?= $model->name ?></strong></h2>
 
     <hr>
 
-    <?= $this->render('_search', ['model' => $searchModel, 'action' => ['view', 'id' => $model->id]]); ?>
+    <?= $this->render('_search', ['model' => $searchModel, 'action' => ['view', 'id' => $model->id, 'cid' => $category->id, 'fid' => $fid]]); ?>
 
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
@@ -49,6 +51,8 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
     <hr>
+
+    <?php endif; ?>
 
     <h2>Files in folder <strong><?= $model->name ?></strong></h2>
 

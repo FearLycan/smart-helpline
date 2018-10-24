@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h2>Folders</h2>
 
-    <?= $this->render('../folder/_search', ['model' => $searchFolderModel, 'action' => ['view', 'id' => $category->id]]); ?>
+    <?= $this->render('_search-folder', ['model' => $searchFolderModel, 'action' => ['view', 'id' => $category->id]]); ?>
 
     <?= ListView::widget([
         'dataProvider' => $dataFolderProvider,
