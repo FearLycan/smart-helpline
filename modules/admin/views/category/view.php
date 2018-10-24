@@ -92,6 +92,37 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
+    <div class="row">
+        <?php $form = ActiveForm::begin(); ?>
+
+        <div class="col-md-12">
+            <?= $form->field($quickFolderCategoryForm, 'folders')->widget(Select2::classname(), [
+                'data' => $folders,
+                'size' => Select2::LARGE,
+                'theme' => Select2::THEME_BOOTSTRAP,
+                'options' => ['placeholder' => 'Select folders ...', 'multiple' => true],
+                'pluginOptions' => [
+                    'allowClear' => true,
+                    'multiple' => true
+                ],
+            ]); ?>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group">
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            </div>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <hr>
+        </div>
+    </div>
+
     <h2>Files in this Category</h2>
 
     <?= GridView::widget([

@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use app\modules\admin\components\Controller;
 use app\modules\admin\models\File;
+use app\modules\admin\models\FileSearch;
 use app\modules\admin\models\forms\ContractForm;
 use app\modules\admin\models\forms\QuickUserForm;
 use app\modules\admin\models\User;
@@ -85,11 +86,17 @@ class ContractController extends Controller
             return $this->redirect(['contract/view', 'id' => $id]);
         }
 
+        $searchModel = new FileSearch();
+        $query = File::find()->where(['contract_id' => $id]);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
+
         return $this->render('view', [
             'model' => $model,
             'files' => $files,
             'users' => $users,
             'quickUserForm' => $quickUserForm,
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 

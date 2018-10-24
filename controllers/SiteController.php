@@ -7,6 +7,8 @@ use app\models\Category;
 use app\models\CategorySearch;
 use app\models\File;
 use app\models\FileSearch;
+use app\models\Folder;
+use app\models\searches\FolderSearch;
 use app\models\User;
 use app\models\UserCategory;
 use Yii;
@@ -112,10 +114,19 @@ class SiteController extends Controller
         $searchModel = new FileSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
 
+        $query = Folder::find()
+            ->joinWith('linkedCategories cat')
+            ->where(['cat.category_id' => $id]);
+
+        $searchFolderModel = new FolderSearch();
+        $dataFolderProvider = $searchFolderModel->search(Yii::$app->request->queryParams, $query);
+
         return $this->render('view', [
             'category' => $category,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'searchFolderModel' => $searchFolderModel,
+            'dataFolderProvider' => $dataFolderProvider,
         ]);
     }
 

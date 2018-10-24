@@ -76,11 +76,12 @@ class FileSearch extends File
             ->andFilterWhere(['like', 'file.format', $this->format])
             ->andFilterWhere(['like', 'category.name', $this->category])
             ->andFilterWhere(['like', 'file.created_at', $this->created_at])
-            ->andFilterWhere([
-                'or',
-                ['like', 'author.name', $this->author],
-                ['like', 'author.lastname', $this->author],
-            ]);
+            ->andFilterWhere(['like', 'author.id', $this->author]);
+//            ->andFilterWhere([
+//                'or',
+//                ['like', 'author.name', $this->author],
+//                ['like', 'author.lastname', $this->author],
+//            ]);
 
         return $dataProvider;
     }

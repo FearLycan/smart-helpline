@@ -5,6 +5,8 @@ namespace app\modules\admin\components;
 
 use app\modules\admin\models\Category;
 use app\modules\admin\models\File;
+use app\modules\admin\models\User;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\web\JsExpression;
@@ -14,7 +16,7 @@ use yii\web\JsExpression;
  *
  * @author Damian Brończyk <damian.bronczyk@gmail.pl>
  */
-class Helpers
+class Helpers extends \app\components\Helpers
 {
     public static function getColumnsFileGride()
     {
@@ -24,33 +26,34 @@ class Helpers
             [
                 'attribute' => 'name',
                 'format' => 'raw',
+                'contentOptions' => ['style' => 'width: 380px;'],
                 'value' => function ($data) {
                     /* @var $data File */
-                    return Html::a($data->name, ['file/view', 'id' => $data->id], [
-                        'data-pjax' => '0'
+                    return Html::a(Helpers::cutThis($data->name, 52) . '.' . $data->format, ['file/view', 'id' => $data->id], [
+                        'data-pjax' => '0',
+                        'title' => $data->name . '.' . $data->format,
                     ]);
                 },
             ],
             [
-                'attribute' => 'format',
-                'contentOptions' => ['style' => 'width: 100px; text-align: center'],
-            ],
-            [
                 'attribute' => 'category',
-                'label' => 'Category',
+                'label' => 'Allocation',
                 'format' => 'raw',
                 'value' => function ($data) {
                     /* @var $data File */
                     if ($data->category_id != 0) {
-                        return Html::a($data->category->name, ['category/view', 'id' => $data->category_id]);
-                    } else {
-                        return Html::a('Contract', ['contract/view', 'id' => $data->contract_id]);
+                        return Html::a($data->category->name, ['category/view', 'id' => $data->category_id], ['title' => 'Category: ' . $data->category->name]);
+                    } elseif ($data->contract_id != 0) {
+                        return Html::a('Contract', ['contract/view', 'id' => $data->contract_id], ['title' => $data->contract->airline_name]);
+                    } elseif ($data->folder_id != 0) {
+                        return Html::a($data->folder->name, ['folder/view', 'id' => $data->folder_id], ['title' => 'Folder: ' . $data->folder->name]);
                     }
                 },
             ],
             [
                 'attribute' => 'author',
                 'label' => 'Author',
+                'filter' => ArrayHelper::map(User::find()->where(['role' => User::ROLE_ADMIN])->orderBy(['name' => SORT_ASC])->all(), 'id', 'fullName'),
                 'format' => 'raw',
                 'value' => function ($data) {
                     /* @var $data File */
@@ -105,6 +108,80 @@ class Helpers
                         'data-pjax' => '0',
                         'data-confirm' => 'Are you sure you want to delete this item?',
                         'data-method' => 'post',
+                    ]);
+                },
+            ],
+        ];
+    }
+
+    public static function getColumnsFileUsersGride()
+    {
+        return [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            [
+                'attribute' => 'name',
+                'format' => 'raw',
+                'contentOptions' => ['style' => 'width: 380px;'],
+                'value' => function ($data) {
+                    /* @var $data File */
+                    return Html::a(Helpers::cutThis($data->name, 52) . '.' . $data->format, ['file/view', 'id' => $data->id], [
+                        'data-pjax' => '0',
+                        'title' => $data->name . '.' . $data->format,
+                    ]);
+                },
+            ],
+            [
+                'attribute' => 'category',
+                'label' => 'Allocation',
+                'format' => 'raw',
+                'value' => function ($data) {
+                    /* @var $data File */
+                    if ($data->category_id != 0) {
+                        return Html::a($data->category->name, ['category/view', 'id' => $data->category_id], ['title' => 'Category: ' . $data->category->name]);
+                    } elseif ($data->contract_id != 0) {
+                        return Html::a('Contract', ['contract/view', 'id' => $data->contract_id], ['title' => $data->contract->airline_name]);
+                    } elseif ($data->folder_id != 0) {
+                        return Html::a($data->folder->name, ['folder/view', 'id' => $data->folder_id], ['title' => 'Folder: ' . $data->folder->name]);
+                    }
+                },
+            ],
+            [
+                'attribute' => 'author',
+                'label' => 'Author',
+                'filter' => ArrayHelper::map(User::find()->where(['role' => User::ROLE_ADMIN])->orderBy(['name' => SORT_ASC])->all(), 'id', 'fullName'),
+                'format' => 'raw',
+                'value' => function ($data) {
+                    /* @var $data File */
+                    return Html::a($data->author->name . ' ' . $data->author->lastname, ['user/view', 'id' => $data->author_id]);
+                },
+            ],
+            'created_at',
+            [
+                'format' => 'raw',
+                'value' => function ($data) {
+                    /* @var $data File */
+
+                    if (in_array($data->format, File::formats())) {
+                        $url = Url::to(['file/view', 'id' => $data->id]);
+                    } else {
+                        $url = Url::to(['/files/' . $data->real_name]);
+                    }
+
+                    return Html::a('<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>', $url, [
+                        'class' => 'btn btn-info btn-xs',
+                        'data-pjax' => '0',
+                        'target' => '_blank',
+                    ]);
+                },
+            ],
+            [
+                'format' => 'raw',
+                'value' => function ($data) {
+                    /* @var $data File */
+                    return Html::a('Download', ['file/download', 'id' => $data->id], [
+                        'class' => 'btn btn-success btn-xs',
+                        'data-pjax' => '0',
                     ]);
                 },
             ],

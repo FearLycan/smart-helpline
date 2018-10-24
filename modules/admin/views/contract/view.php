@@ -1,6 +1,8 @@
 <?php
 
+use app\modules\admin\components\Helpers;
 use kartik\select2\Select2;
+use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\widgets\DetailView;
@@ -183,49 +185,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-md-12">
             <h3>Files</h3>
 
-            <?php if (empty($files)): ?>
-                <p>No files.</p>
-            <?php else: ?>
-                <div class="table-responsive">
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Name</th>
-                            <th>Author</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach ($files as $key => $file): ?>
-                            <tr>
-                                <td width="30"><?= $key + 1 ?></td>
-                                <td><?= Html::a($file->name, ['file/download', 'id' => $file->id], ['data-pjax' => '0']); ?></td>
-                                <td width="250"><?= $file->author->name . ' ' . $file->author->lastname ?></td>
-                                <td width="170" class="text-center">
-                                    <?= Html::a('Download', ['file/download', 'id' => $file->id], [
-                                        'class' => 'btn btn-success btn-xs',
-                                        'data-pjax' => '0',
-                                    ]); ?>
-
-                                    <?= Html::a('Edit', ['file/update', 'id' => $file->id], [
-                                        'class' => 'btn btn-primary btn-xs',
-                                        'data-pjax' => '0',
-                                    ]); ?>
-
-                                    <?= Html::a('Delete', ['file/delete', 'id' => $file->id], [
-                                        'class' => 'btn btn-danger btn-xs',
-                                        'data-pjax' => '0',
-                                        'data-confirm' => 'Are you sure you want to delete this item?',
-                                        'data-method' => 'post',
-                                    ]); ?>
-                                </td>
-                            </tr>
-                        <?php endforeach; ?>
-                        </tbody>
-                    </table>
-                </div>
-            <?php endif; ?>
+            <?= GridView::widget([
+                'dataProvider' => $dataProvider,
+                'filterModel' => $searchModel,
+                'options' => ['class' => 'grid-view table-responsive'],
+                'columns' => Helpers::getColumnsFileGride(),
+            ]); ?>
         </div>
     </div>
 

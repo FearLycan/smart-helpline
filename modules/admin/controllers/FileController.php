@@ -54,7 +54,7 @@ class FileController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate($id, $contractId = null)
+    public function actionCreate($id, $contractId = 0, $folderId = 0)
     {
         $contract = null;
 
@@ -66,6 +66,7 @@ class FileController extends Controller
         $model = new FileForm();
         $model->category_id = $id;
         $model->contract_id = $contractId;
+        $model->folder_id = $folderId;
         $model->scenario = FileForm::SCENARIO_CREATE;
 
         if (Yii::$app->request->isPost) {

@@ -5,7 +5,10 @@ namespace app\modules\admin\controllers;
 use app\modules\admin\components\Controller;
 use app\modules\admin\models\File;
 use app\modules\admin\models\FileSearch;
+use app\modules\admin\models\Folder;
+use app\modules\admin\models\FolderCategory;
 use app\modules\admin\models\forms\CategoryForm;
+use app\modules\admin\models\forms\QuickFolderCategoryForm;
 use app\modules\admin\models\forms\QuickUserForm;
 use app\modules\admin\models\User;
 use app\modules\admin\models\UserCategory;
@@ -87,12 +90,33 @@ class CategoryController extends Controller
             return $this->redirect(['category/view', 'id' => $id]);
         }
 
+        $quickFolderCategoryForm = new QuickFolderCategoryForm();
+        $folders = ArrayHelper::map(Folder::find()->select(['id', 'name'])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+
+        $fols = FolderCategory::find()->where(['category_id' => $id])->select(['folder_id'])->all();
+        $tab = [];
+        foreach ($fols as $fol) {
+            array_push($tab, $fol->folder_id);
+        }
+
+        $quickFolderCategoryForm->folders = $tab;
+
+        if ($quickFolderCategoryForm->load(Yii::$app->request->post())) {
+            if ($quickFolderCategoryForm->folders != $tab) {
+                FolderCategory::connectFoldersToCategory($quickFolderCategoryForm->folders, $id);
+            }
+
+            return $this->redirect(['category/view', 'id' => $id]);
+        }
+
         return $this->render('view', [
             'model' => $this->findModel($id),
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
             'quickUserForm' => $quickUserForm,
             'users' => $users,
+            'folders' => $folders,
+            'quickFolderCategoryForm' => $quickFolderCategoryForm,
         ]);
     }
 

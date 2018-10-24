@@ -240,4 +240,9 @@ class User extends ActiveRecord implements IdentityInterface
 
         return $can;
     }
+
+    public function getFullName()
+    {
+        return $this->name . ' ' . $this->lastname;
+    }
 }

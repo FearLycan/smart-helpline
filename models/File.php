@@ -15,12 +15,15 @@ use yii\helpers\StringHelper;
  * @property int $category_id
  * @property int $author_id
  * @property int $contract_id
+ * @property int $folder_id
  * @property string $created_at
  * @property string $updated_at
  * @property string $description
  *
  * @property User $author
  * @property Category $category
+ * @property Folder $folder
+ * @property Contract $contract
  *
  * * @author Damian Brończyk <damian.bronczyk@gmail.pl>
  */
@@ -40,7 +43,7 @@ class File extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['category_id', 'author_id', 'contract_id'], 'integer'],
+            [['category_id', 'author_id', 'contract_id', 'folder_id'], 'integer'],
             [['created_at'], 'safe'],
             [['name', 'real_name', 'format', 'description'], 'string', 'max' => 255],
             [['author_id'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['author_id' => 'id']],
@@ -79,6 +82,22 @@ class File extends \yii\db\ActiveRecord
     public function getCategory()
     {
         return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getFolder()
+    {
+        return $this->hasOne(Folder::className(), ['id' => 'folder_id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getContract()
+    {
+        return $this->hasOne(Contract::className(), ['id' => 'contract_id']);
     }
 
     /**

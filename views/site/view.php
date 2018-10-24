@@ -3,34 +3,54 @@
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\CategorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
 /* @var $category \app\models\Category */
 
 use app\models\File;
 use yii\grid\GridView;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\widgets\ListView;
+use yii\widgets\Pjax;
 
 $this->title = $category->name;
-$this->params['breadcrumbs'][] = ['label' => 'Kategoria', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?php Pjax::begin(); ?>
+    <h1><?= $this->title ?></h1>
 
-<h1><?= $this->title ?></h1>
+    <p><strong>Author: </strong><?= Html::encode($category->author->name . ' ' . $category->author->lastname) ?></p>
+    <p><strong>Created at: </strong><?= Html::encode($category->created_at) ?></p>
+    <p><strong>Updated at: </strong><?= Html::encode($category->updated_at) ?></p>
 
-<p><strong>Author: </strong><?= Html::encode($category->author->name . ' ' . $category->author->lastname) ?></p>
-<p><strong>Created at: </strong><?= Html::encode($category->created_at) ?></p>
-<p><strong>Updated at: </strong><?= Html::encode($category->updated_at) ?></p>
-
-<div class="row">
-    <div class="col-md-12">
-        <h3>Description</h3>
-        <?= $category->description ?>
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Description</h3>
+            <?= $category->description ?>
+        </div>
     </div>
-</div>
 
-<hr>
+    <hr>
 
-<h3>Files list</h3>
+    <h2>Folders</h2>
+
+    <?= $this->render('../folder/_search', ['model' => $searchFolderModel, 'action' => ['view', 'id' => $category->id]]); ?>
+
+    <?= ListView::widget([
+        'dataProvider' => $dataFolderProvider,
+        'summary' => false,
+        'itemView' => '_folder',
+        'viewParams' => ['cid' => $category->id],
+        'options' => [
+            'tag' => 'div',
+            'class' => 'row',
+        ],
+    ]); ?>
+
+    <hr>
+
+    <h3>Files list</h3>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
@@ -100,3 +120,5 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ],
 ]); ?>
+
+<?php Pjax::end(); ?>
