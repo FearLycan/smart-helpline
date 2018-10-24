@@ -174,11 +174,15 @@ class FolderController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
+    public function actionDelete($id, $f = null)
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        if ($f != null) {
+            return $this->redirect(['index']);
+        }
+
+        return $this->redirect(Yii::$app->request->referrer ?: ['index']);
     }
 
     /**
